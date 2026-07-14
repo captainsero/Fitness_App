@@ -84,12 +84,12 @@ class _LoginViewState extends State<_LoginView> {
           fit: StackFit.expand,
           children: [
             ImageFiltered(
-              imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              imageFilter: ImageFilter.blur(sigmaX: 3, sigmaY: 5),
               child: Image.asset(
                 AssetsConst.loginBackground,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) =>
-                    const ColoredBox(color: AppColors.backgroundDark),
+                const ColoredBox(color: AppColors.backgroundDark),
               ),
             ),
             DecoratedBox(
@@ -107,16 +107,16 @@ class _LoginViewState extends State<_LoginView> {
             ),
             SafeArea(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(top: AppPadding.p40),
+                padding: const EdgeInsets.only(top: AppPadding.p20),
                 child: Column(
                   children: [
                     Image.asset(
                       AssetsConst.logo,
                       height: AppSize.s70,
                       errorBuilder: (context, error, stackTrace) =>
-                          const SizedBox(height: AppSize.s70),
+                      const SizedBox(height: AppSize.s70),
                     ),
-                    const SizedBox(height: AppSize.s30),
+                    const SizedBox(height: AppSize.s20),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: AppPadding.p30,
@@ -144,16 +144,16 @@ class _LoginViewState extends State<_LoginView> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: AppSize.s30),
+                    const SizedBox(height: AppSize.s20),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: AppPadding.p30),
+                      padding: const EdgeInsets.only(bottom: AppPadding.p20),
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.fromLTRB(
-                          AppPadding.p30,
-                          AppPadding.p30,
-                          AppPadding.p30,
-                          AppPadding.p30,
+                          AppPadding.p20,
+                          AppPadding.p20,
+                          AppPadding.p20,
+                          AppPadding.p20,
                         ),
                         decoration: BoxDecoration(
                           color: AppColors.neutral900.withAlpha(115),
@@ -167,147 +167,153 @@ class _LoginViewState extends State<_LoginView> {
                         child: Form(
                           key: _formKey,
                           autovalidateMode:
-                              AutovalidateMode.onUserInteraction,
+                          AutovalidateMode.onUserInteraction,
                           child: Column(
                             children: [
-                            Text(
-                              s.login,
-                              style: const TextStyle(
-                                color: AppColors.white,
-                                fontFamily: FontConstants.balooThambi2,
-                                fontWeight: FontWeightManager.bold,
-                                fontSize: FontSize.s24,
-                              ),
-                            ),
-                            const SizedBox(height: AppSize.s24),
-                            LoginTextField(
-                              controller: _emailController,
-                              hintText: s.email,
-                              prefixIcon: Icons.email_outlined,
-                              keyboardType: TextInputType.emailAddress,
-                              validator: (value) => AppTextFieldValidator
-                                  .validateEmail(value)
-                                  ?.localize(s),
-                            ),
-                            const SizedBox(height: AppSize.s16),
-                            LoginTextField(
-                              controller: _passwordController,
-                              hintText: s.password,
-                              prefixIcon: Icons.lock_outline,
-                              obscureText: _obscurePassword,
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscurePassword
-                                      ? Icons.visibility_off_outlined
-                                      : Icons.visibility_outlined,
-                                  color: AppColors.neutral400,
-                                ),
-                                onPressed: () => setState(
-                                  () => _obscurePassword = !_obscurePassword,
+                              Text(
+                                s.login,
+                                style: const TextStyle(
+                                  color: AppColors.white,
+                                  fontFamily: FontConstants.balooThambi2,
+                                  fontWeight: FontWeightManager.bold,
+                                  fontSize: FontSize.s24,
                                 ),
                               ),
-                              validator: (value) => AppTextFieldValidator
-                                  .validatePassword(value)
-                                  ?.localize(s),
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  s.forgetPassword,
-                                  style: const TextStyle(
-                                    color: AppColors.primaryLight3,
-                                    fontFamily: FontConstants.balooThambi2,
-                                    fontSize: FontSize.s14,
-                                  ),
-                                ),
+                              const SizedBox(height: AppSize.s8),
+                              LoginTextField(
+                                controller: _emailController,
+                                hintText: s.email,
+                                prefixIcon: Icons.email_outlined,
+                                keyboardType: TextInputType.emailAddress,
+                                validator: (value) => AppTextFieldValidator
+                                    .validateEmail(value)
+                                    ?.localize(s),
                               ),
-                            ),
-                            const SizedBox(height: AppSize.s8),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Divider(
-                                    color: AppColors.white.withAlpha(50),
+                              const SizedBox(height: AppSize.s8),
+                              LoginTextField(
+                                controller: _passwordController,
+                                hintText: s.password,
+                                prefixIcon: Icons.lock_outline,
+                                obscureText: _obscurePassword,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscurePassword
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                    color: AppColors.neutral400,
+                                  ),
+                                  onPressed: () => setState(
+                                        () =>
+                                    _obscurePassword = !_obscurePassword,
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: AppPadding.p12,
-                                  ),
-                                  child: Text(
-                                    s.or,
-                                    style: const TextStyle(
-                                      color: AppColors.neutral400,
-                                      fontFamily: FontConstants.balooThambi2,
-                                      fontSize: FontSize.s14,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Divider(
-                                    color: AppColors.white.withAlpha(50),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: AppSize.s20),
-                            const SocialLoginRow(),
-                            const SizedBox(height: AppSize.s30),
-                            BlocBuilder<LoginCubit, LoginState>(
-                              builder: (context, state) {
-                                final isLoading = state.isLoading ?? false;
-                                return SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed:
-                                        isLoading ? null : _onLoginPressed,
-                                    child: isLoading
-                                        ? const SizedBox(
-                                            height: AppSize.s20,
-                                            width: AppSize.s20,
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: AppSize.s2,
-                                              color: AppColors.white,
-                                            ),
-                                          )
-                                        : Text(s.login),
-                                  ),
-                                );
-                              },
-                            ),
-                            const SizedBox(height: AppSize.s20),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    s.dontHaveAccountYet,
-                                    style: const TextStyle(
-                                      color: AppColors.neutral300,
-                                      fontFamily: FontConstants.balooThambi2,
-                                      fontSize: FontSize.s14,
-                                    ),
-                                  ),
-                                ),
-                                TextButton(
+                                validator: (value) => AppTextFieldValidator
+                                    .validatePassword(value)
+                                    ?.localize(s),
+                              ),
+                              const SizedBox(height: AppSize.s8),
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: TextButton(
                                   onPressed: () {},
                                   child: Text(
-                                    s.register,
+                                    s.forgetPassword,
                                     style: const TextStyle(
                                       color: AppColors.primaryLight3,
                                       fontFamily: FontConstants.balooThambi2,
-                                      fontWeight: FontWeightManager.bold,
                                       fontSize: FontSize.s14,
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
+                              ),
+                              const SizedBox(height: AppSize.s8),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Divider(
+                                      color: AppColors.white.withAlpha(50),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: AppPadding.p12,
+                                    ),
+                                    child: Text(
+                                      s.or,
+                                      style: const TextStyle(
+                                        color: AppColors.neutral400,
+                                        fontFamily:
+                                        FontConstants.balooThambi2,
+                                        fontSize: FontSize.s14,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Divider(
+                                      color: AppColors.white.withAlpha(50),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: AppSize.s8),
+                              const SocialLoginRow(),
+                              const SizedBox(height: AppSize.s8),
+                              BlocBuilder<LoginCubit, LoginState>(
+                                builder: (context, state) {
+                                  final isLoading = state.isLoading ?? false;
+                                  return SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      onPressed:
+                                      isLoading ? null : _onLoginPressed,
+                                      child: isLoading
+                                          ? const SizedBox(
+                                        height: AppSize.s20,
+                                        width: AppSize.s20,
+                                        child:
+                                        CircularProgressIndicator(
+                                          strokeWidth: AppSize.s2,
+                                          color: AppColors.white,
+                                        ),
+                                      )
+                                          : Text(s.login),
+                                    ),
+                                  );
+                                },
+                              ),
+                              const SizedBox(height: AppSize.s8),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      s.dontHaveAccountYet,
+                                      style: const TextStyle(
+                                        color: AppColors.neutral300,
+                                        fontFamily:
+                                        FontConstants.balooThambi2,
+                                        fontSize: FontSize.s14,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      s.register,
+                                      style: const TextStyle(
+                                        color: AppColors.primaryLight3,
+                                        fontFamily:
+                                        FontConstants.balooThambi2,
+                                        fontWeight: FontWeightManager.bold,
+                                        fontSize: FontSize.s14,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
                       ),
                     ),
                   ],
