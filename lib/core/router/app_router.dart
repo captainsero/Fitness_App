@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
+import '../../features/auth/login/presentation/view/login_view.dart';
 import '../../features/error/presentation/view/error_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
-import '../../features/login/presentation/view/login_view.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 import '../../features/smart_coach/presentation/view/smart_coach_view.dart';
 import '../../features/workouts/presentation/view/workouts_view.dart';
