@@ -3,13 +3,18 @@ import '../../features/error/presentation/view/error_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 import '../../features/smart_coach/presentation/view/smart_coach_view.dart';
+import '../../features/splash/presentation/view/pages/splash_page.dart';
 import '../../features/workouts/presentation/view/workouts_view.dart';
 import 'route_path.dart';
 
 abstract class AppRouter {
   static final GoRouter goRouter = GoRouter(
-    initialLocation: RoutePath.exploreRoute,
+    initialLocation: RoutePath.splashRoute,
     routes: [
+      GoRoute(
+        path: RoutePath.splashRoute,
+        builder: (context, state) => const SplashPage(),
+      ),
       GoRoute(
         path: RoutePath.exploreRoute,
         builder: (context, state) => const ExploreView(),

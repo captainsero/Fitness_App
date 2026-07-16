@@ -19,7 +19,7 @@ class ErrorScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppPadding.p20),
           child: Column(
-            mainAxisAlignment: .center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.error_outline_rounded,
@@ -49,7 +49,7 @@ class ErrorScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // TODO(dev): change this to home Screen
-                    context.go(RoutePath.placeHolderRoute);
+                    context.go(RoutePath.splashRoute);
                   },
                   child: Text(S.current.goToHome),
                 ),

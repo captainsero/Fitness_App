@@ -70,4 +70,5 @@ abstract class AssetsConst {
   static const String smartCoachIcon = 'assets/icons/chat ai.svg';
   static const String workoutsIcon = 'assets/icons/gym.svg';
   static const String profileIcon = 'assets/icons/profile.svg';
+  static const String logo = 'assets/images/logo.png';
 }

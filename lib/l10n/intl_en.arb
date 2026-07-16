@@ -25,5 +25,9 @@
     "invalidIdNumber": "Enter a valid 14-digit ID number",
     "error": "Error",
     "oopsSomthingWentWrong": "Oops! Something went wrong.",
-    "goToHome": "goToHome"
+    "goToHome": "goToHome",
+    "fitnessApp": "Fitness App",
+    "loading": "Loading...",
+    "your_fitness_journey_starts_here": "Your fitness journey starts here",
+    "VersionNumber": "Version 1.0.0"
 }
