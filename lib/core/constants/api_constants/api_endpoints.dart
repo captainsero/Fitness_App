@@ -4,4 +4,5 @@ abstract class ApiEndpoints {
   /// Base URL for building endpoints.
   static const String baseUrl = BaseUrls.fitnessBaseUrl;
   static const String signIn = '/auth/signin';
+  static const String signUp = '/auth/signup';
 }

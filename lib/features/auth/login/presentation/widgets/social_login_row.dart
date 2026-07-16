@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/color_manager.dart';
-import '../../../../core/constants/values_manager.dart';
+import '../../../../../core/constants/color_manager.dart';
+import '../../../../../core/constants/values_manager.dart';
 
 class SocialLoginRow extends StatelessWidget {
   const SocialLoginRow({super.key});
