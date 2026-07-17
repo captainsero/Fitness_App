@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../config/base_response/base_response.dart';
 import '../../../../../config/services/secure_storage/secure_storage_service.dart';
-
 import '../../../../../core/constants/app_keys/secure_storage_keys.dart';
 import '../../api/register_api.dart';
 import '../../../login/domain/entities/user_entity.dart';
@@ -43,19 +42,6 @@ class RegisterRepositoryImpl implements RegisterRepository {
         'goal': goal,
         'activityLevel': activityLevel,
       });
-
-      // Same session-only persistence LoginRepositoryImpl uses -- signing
-      // up logs the user straight in (the API returns a token), so the
-      // remaining onboarding steps (age/height/goal) run as an
-      // authenticated user.
-      await _secureStorageService.write(
-        key: SecureStorageKeys.token,
-        value: result.token,
-      );
-      await _secureStorageService.write(
-        key: SecureStorageKeys.userEmail,
-        value: result.user.email,
-      );
 
       return SuccessBaseResponse(data: result.user);
     } on Exception catch (e) {

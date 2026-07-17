@@ -10,25 +10,11 @@ import '../../../../../core/router/route_path.dart';
 import '../../../../../generated/l10n.dart';
 import '../models/register_form_data.dart';
 
-/// Gender options for the "tell us about yourself" onboarding step.
 enum Gender { male, female }
 
-/// Onboarding step 1/6 - gender selection.
-///
-/// `POST /auth/signup` needs firstName/lastName/email/password/gender
-/// *plus* age/weight/height/goal/activityLevel all in one request, so the
-/// account isn't created here. This screen just records the gender picked
-/// and carries [formData] (from [RegisterView]) forward via
-/// [RegisterFormData.copyWith] to the next step -- the actual signup call
-/// happens once every field is known, on the final onboarding step
-/// (SelectActivityLevelView).
 class SelectGenderView extends StatelessWidget {
   const SelectGenderView({super.key, this.formData});
 
-  /// Data collected on the previous screen. Null if this screen was
-  /// reached directly (e.g. deep link / dev testing) rather than via the
-  /// normal Register -> SelectGender flow -- in that case there's
-  /// nothing valid to sign up with, so "Next" is disabled entirely.
   final RegisterFormData? formData;
 
   @override
@@ -64,6 +50,7 @@ class _SelectGenderViewState extends State<_SelectGenderView> {
   void _onNextPressed() {
     final data = widget.formData;
     final gender = _selectedGender;
+
     if (data == null || gender == null) return;
 
     context.push(
@@ -85,7 +72,7 @@ class _SelectGenderViewState extends State<_SelectGenderView> {
             child: Image.asset(
               AssetsConst.loginBackground,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) =>
+              errorBuilder: (_, __, ___) =>
               const ColoredBox(color: AppColors.backgroundDark),
             ),
           ),
@@ -95,22 +82,21 @@ class _SelectGenderViewState extends State<_SelectGenderView> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppColors.black.withAlpha(140),
-                  AppColors.black.withAlpha(210),
-                  AppColors.black.withAlpha(245),
+                  AppColors.black.withAlpha(105),
+                  AppColors.black.withAlpha(165),
+                  AppColors.black.withAlpha(205),
                 ],
               ),
             ),
           ),
-          Column(
-            children: [
-              SafeArea(
-                bottom: false,
-                child: Padding(
+          SafeArea(
+            child: Column(
+              children: [
+                Padding(
                   padding: const EdgeInsets.fromLTRB(
-                    AppPadding.p20,
-                    AppPadding.p12,
-                    AppPadding.p20,
+                    AppPadding.p16,
+                    AppPadding.p16,
+                    AppPadding.p16,
                     0,
                   ),
                   child: Column(
@@ -122,26 +108,21 @@ class _SelectGenderViewState extends State<_SelectGenderView> {
                             child: Center(
                               child: Image.asset(
                                 AssetsConst.logo,
-                                height: AppSize.s50,
-                                errorBuilder:
-                                    (context, error, stackTrace) =>
-                                const SizedBox(height: AppSize.s50),
+                                height: AppSize.s48,
+                                errorBuilder: (_, __, ___) =>
+                                const SizedBox(height: AppSize.s48),
                               ),
                             ),
                           ),
-                          const SizedBox(width: AppSize.s40),
+                          const SizedBox(width: 32),
                         ],
                       ),
-                      const SizedBox(height: AppSize.s16),
-                      Text(
-                        s.onboardingStepIndicator(1, 6),
-                        style: const TextStyle(
-                          color: AppColors.white,
-                          fontFamily: FontConstants.balooThambi2,
-                          fontSize: FontSize.s14,
-                        ),
+                      const SizedBox(height: AppSize.s12),
+                      const _StepProgressIndicator(
+                        step: 1,
+                        totalSteps: 6,
                       ),
-                      const SizedBox(height: AppSize.s24),
+                      const SizedBox(height: AppSize.s20),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -150,11 +131,11 @@ class _SelectGenderViewState extends State<_SelectGenderView> {
                             color: AppColors.white,
                             fontFamily: FontConstants.balooThambi2,
                             fontWeight: FontWeightManager.bold,
-                            fontSize: FontSize.s22,
+                            fontSize: FontSize.s20,
                           ),
                         ),
                       ),
-                      const SizedBox(height: AppSize.s8),
+                      const SizedBox(height: AppSize.s4),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -162,81 +143,93 @@ class _SelectGenderViewState extends State<_SelectGenderView> {
                           style: const TextStyle(
                             color: AppColors.white,
                             fontFamily: FontConstants.balooThambi2,
-                            fontSize: FontSize.s14,
+                            fontSize: FontSize.s12,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(top: AppSize.s24),
-                  padding: EdgeInsets.fromLTRB(
-                    AppPadding.p30,
-                    AppPadding.p40,
-                    AppPadding.p30,
-                    AppPadding.p20 + MediaQuery.of(context).padding.bottom,
+                const SizedBox(height: AppSize.s20),
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(RadiusSize.r30),
+                    topRight: Radius.circular(RadiusSize.r30),
                   ),
-                  decoration: const BoxDecoration(
-                    color: Color(0x1AFFFFFF),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(RadiusSize.r30),
-                      topRight: Radius.circular(RadiusSize.r30),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      _GenderOption(
-                        icon: Icons.male,
-                        label: s.male,
-                        isSelected: _selectedGender == Gender.male,
-                        onTap: () => _onGenderTap(Gender.male),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.fromLTRB(
+                        AppPadding.p20,
+                        AppPadding.p24,
+                        AppPadding.p20,
+                        AppPadding.p16 + MediaQuery.of(context).padding.bottom,
                       ),
-                      const SizedBox(height: AppSize.s24),
-                      _GenderOption(
-                        icon: Icons.female,
-                        label: s.female,
-                        isSelected: _selectedGender == Gender.female,
-                        onTap: () => _onGenderTap(Gender.female),
+                      decoration: BoxDecoration(
+                        color: AppColors.neutral900.withAlpha(105),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(RadiusSize.r30),
+                          topRight: Radius.circular(RadiusSize.r30),
+                        ),
+                        border: Border.all(
+                          color: AppColors.white.withAlpha(35),
+                        ),
                       ),
-                      const Spacer(),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: _canContinue ? _onNextPressed : null,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: _canContinue
-                                ? AppColors.primary
-                                : AppColors.neutral300,
-                            disabledBackgroundColor: AppColors.neutral300,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: AppPadding.p16,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                RadiusSize.r100,
+                      child: Column(
+                        children: [
+                          _GenderOption(
+                            icon: Icons.male,
+                            label: s.male,
+                            isSelected: _selectedGender == Gender.male,
+                            onTap: () => _onGenderTap(Gender.male),
+                          ),
+                          const SizedBox(height: AppSize.s16),
+                          _GenderOption(
+                            icon: Icons.female,
+                            label: s.female,
+                            isSelected: _selectedGender == Gender.female,
+                            onTap: () => _onGenderTap(Gender.female),
+                          ),
+                          const SizedBox(height: AppSize.s24,),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed:
+                              _canContinue ? _onNextPressed : null,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: _canContinue
+                                    ? AppColors.primary
+                                    : AppColors.neutral300,
+                                disabledBackgroundColor:
+                                AppColors.neutral300,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: AppPadding.p12,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    RadiusSize.r100,
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                s.next,
+                                style: const TextStyle(
+                                  color: AppColors.white,
+                                  fontFamily: FontConstants.balooThambi2,
+                                  fontWeight: FontWeightManager.bold,
+                                  fontSize: FontSize.s14,
+                                ),
                               ),
                             ),
                           ),
-                          child: Text(
-                            s.next,
-                            style: const TextStyle(
-                              color: AppColors.white,
-                              fontFamily: FontConstants.balooThambi2,
-                              fontWeight: FontWeightManager.bold,
-                              fontSize: FontSize.s16,
-                            ),
-                          ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -255,8 +248,8 @@ class _BackButton extends StatelessWidget {
       onTap: onTap,
       customBorder: const CircleBorder(),
       child: Container(
-        width: AppSize.s40,
-        height: AppSize.s40,
+        width: 32,
+        height: 32,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: AppColors.primary,
@@ -265,13 +258,52 @@ class _BackButton extends StatelessWidget {
         child: const Icon(
           Icons.arrow_back_ios_new,
           color: AppColors.white,
-          size: AppSize.s16,
+          size: FontSize.s12,
         ),
       ),
     );
   }
 }
 
+
+class _StepProgressIndicator extends StatelessWidget {
+  const _StepProgressIndicator({
+    required this.step,
+    required this.totalSteps,
+  });
+
+  final int step;
+  final int totalSteps;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: AppSize.s16,
+          height: AppSize.s16,
+          child: CircularProgressIndicator(
+            value: step / totalSteps,
+            strokeWidth: 2,
+            color: AppColors.primary,
+            backgroundColor: AppColors.white.withAlpha(60),
+          ),
+        ),
+        const SizedBox(width: AppSize.s4),
+        Text(
+          '$step/$totalSteps',
+          style: const TextStyle(
+            color: AppColors.primary,
+            fontFamily: FontConstants.balooThambi2,
+            fontWeight: FontWeightManager.bold,
+            fontSize: FontSize.s12,
+          ),
+        ),
+      ],
+    );
+  }
+}
 class _GenderOption extends StatelessWidget {
   const _GenderOption({
     required this.icon,
@@ -292,23 +324,29 @@ class _GenderOption extends StatelessWidget {
       customBorder: const CircleBorder(),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        width: AppSize.s90,
-        height: AppSize.s90,
+        width: 76,
+        height: 76,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isSelected ? AppColors.primary : Colors.transparent,
+          color: isSelected
+              ? AppColors.primary.withAlpha(180)
+              : AppColors.white.withAlpha(15),
           border: Border.all(
             color: isSelected
                 ? AppColors.primary
-                : AppColors.white.withAlpha(150),
+                : AppColors.white.withAlpha(100),
             width: AppSize.s1_5,
           ),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: AppColors.white, size: AppSize.s30),
+            Icon(
+              icon,
+              color: AppColors.white,
+              size: AppSize.s24,
+            ),
             const SizedBox(height: AppSize.s4),
             Text(
               label,

@@ -10,20 +10,28 @@ import '../../../../../core/router/route_path.dart';
 import '../../../../../generated/l10n.dart';
 import '../models/register_form_data.dart';
 
-/// Goal options for the "what is your goal" onboarding step.
 enum Goal { gainWeight, loseWeight, getFitter, gainMoreFlexible, learnTheBasics }
 
-/// Onboarding step 5/6 - goal selection.
-///
-/// Records the chosen goal onto [formData] and carries it forward to the
-/// activity-level step -- the actual `POST /auth/signup` call happens once
-/// every onboarding field is known, on that final step
-/// (SelectActivityLevelView).
+extension GoalApiValue on Goal {
+  String get apiValue {
+    switch (this) {
+      case Goal.gainWeight:
+        return 'Gain weight';
+      case Goal.loseWeight:
+        return 'Lose weight';
+      case Goal.getFitter:
+        return 'Get fitter';
+      case Goal.gainMoreFlexible:
+        return 'Gain more flexible';
+      case Goal.learnTheBasics:
+        return 'Learn the basics';
+    }
+  }
+}
+
 class SelectGoalView extends StatefulWidget {
   const SelectGoalView({super.key, this.formData});
 
-  /// Data collected on the previous screens. Null if this screen was
-  /// reached directly rather than via the normal flow.
   final RegisterFormData? formData;
 
   @override
@@ -48,11 +56,12 @@ class _SelectGoalViewState extends State<SelectGoalView> {
   void _onNextPressed() {
     final data = widget.formData;
     final goal = _selectedGoal;
+
     if (!_canContinue || data == null || goal == null) return;
 
     context.push(
       RoutePath.selectActivityLevelRoute,
-      extra: data.copyWith(goal: goal.name),
+      extra: data.copyWith(goal: goal.apiValue),
     );
   }
 
@@ -69,7 +78,7 @@ class _SelectGoalViewState extends State<SelectGoalView> {
             child: Image.asset(
               AssetsConst.loginBackground,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) =>
+              errorBuilder: (_, __, ___) =>
               const ColoredBox(color: AppColors.backgroundDark),
             ),
           ),
@@ -79,21 +88,23 @@ class _SelectGoalViewState extends State<SelectGoalView> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppColors.black.withAlpha(140),
-                  AppColors.black.withAlpha(210),
-                  AppColors.black.withAlpha(245),
+                  AppColors.black.withAlpha(105),
+                  AppColors.black.withAlpha(165),
+                  AppColors.black.withAlpha(205),
                 ],
               ),
             ),
           ),
           SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.only(top: AppPadding.p12),
+              padding: const EdgeInsets.symmetric(
+                vertical: AppPadding.p16,
+              ),
               child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: AppPadding.p20,
+                      horizontal: AppPadding.p16,
                     ),
                     child: Column(
                       children: [
@@ -104,19 +115,21 @@ class _SelectGoalViewState extends State<SelectGoalView> {
                               child: Center(
                                 child: Image.asset(
                                   AssetsConst.logo,
-                                  height: AppSize.s50,
-                                  errorBuilder:
-                                      (context, error, stackTrace) =>
-                                  const SizedBox(height: AppSize.s50),
+                                  height: AppSize.s48,
+                                  errorBuilder: (_, __, ___) =>
+                                  const SizedBox(height: AppSize.s48),
                                 ),
                               ),
                             ),
-                            const SizedBox(width: AppSize.s40),
+                            const SizedBox(width: 32),
                           ],
                         ),
-                        const SizedBox(height: AppSize.s16),
-                        const _StepProgressIndicator(step: 5, totalSteps: 6),
-                        const SizedBox(height: AppSize.s24),
+                        const SizedBox(height: AppSize.s12),
+                        const _StepProgressIndicator(
+                          step: 5,
+                          totalSteps: 6,
+                        ),
+                        const SizedBox(height: AppSize.s20),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -125,11 +138,11 @@ class _SelectGoalViewState extends State<SelectGoalView> {
                               color: AppColors.white,
                               fontFamily: FontConstants.balooThambi2,
                               fontWeight: FontWeightManager.bold,
-                              fontSize: FontSize.s22,
+                              fontSize: FontSize.s20,
                             ),
                           ),
                         ),
-                        const SizedBox(height: AppSize.s8),
+                        const SizedBox(height: AppSize.s4),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
@@ -137,99 +150,100 @@ class _SelectGoalViewState extends State<SelectGoalView> {
                             style: const TextStyle(
                               color: AppColors.white,
                               fontFamily: FontConstants.balooThambi2,
-                              fontSize: FontSize.s14,
+                              fontSize: FontSize.s12,
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      AppPadding.p20,
-                      AppPadding.p30,
-                      AppPadding.p20,
-                      AppPadding.p20,
+                  const SizedBox(height: AppSize.s20),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(RadiusSize.r30),
                     ),
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: AppPadding.p26,
-                        horizontal: AppPadding.p16,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.neutral900.withAlpha(115),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(RadiusSize.r30),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(AppPadding.p20),
+                        decoration: BoxDecoration(
+                          color: AppColors.neutral900.withAlpha(105),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(RadiusSize.r30),
+                          ),
+                          border: Border.all(
+                            color: AppColors.white.withAlpha(35),
+                          ),
                         ),
-                        border: Border.all(
-                          color: AppColors.white.withAlpha(25),
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          _GoalOption(
-                            label: s.gainWeight,
-                            isSelected: _selectedGoal == Goal.gainWeight,
-                            onTap: () => _onGoalTap(Goal.gainWeight),
-                          ),
-                          const SizedBox(height: AppSize.s16),
-                          _GoalOption(
-                            label: s.loseWeight,
-                            isSelected: _selectedGoal == Goal.loseWeight,
-                            onTap: () => _onGoalTap(Goal.loseWeight),
-                          ),
-                          const SizedBox(height: AppSize.s16),
-                          _GoalOption(
-                            label: s.getFitter,
-                            isSelected: _selectedGoal == Goal.getFitter,
-                            onTap: () => _onGoalTap(Goal.getFitter),
-                          ),
-                          const SizedBox(height: AppSize.s16),
-                          _GoalOption(
-                            label: s.gainMoreFlexible,
-                            isSelected:
-                            _selectedGoal == Goal.gainMoreFlexible,
-                            onTap: () => _onGoalTap(Goal.gainMoreFlexible),
-                          ),
-                          const SizedBox(height: AppSize.s16),
-                          _GoalOption(
-                            label: s.learnTheBasics,
-                            isSelected: _selectedGoal == Goal.learnTheBasics,
-                            onTap: () => _onGoalTap(Goal.learnTheBasics),
-                          ),
-                          const SizedBox(height: AppSize.s25),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: _canContinue ? _onNextPressed : null,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: _canContinue
-                                    ? AppColors.primary
-                                    : AppColors.neutral300,
-                                disabledBackgroundColor:
-                                AppColors.neutral300,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: AppPadding.p16,
+                        child: Column(
+                          children: [
+                            _GoalOption(
+                              label: s.gainWeight,
+                              isSelected: _selectedGoal == Goal.gainWeight,
+                              onTap: () => _onGoalTap(Goal.gainWeight),
+                            ),
+                            const SizedBox(height: AppSize.s12),
+                            _GoalOption(
+                              label: s.loseWeight,
+                              isSelected: _selectedGoal == Goal.loseWeight,
+                              onTap: () => _onGoalTap(Goal.loseWeight),
+                            ),
+                            const SizedBox(height: AppSize.s12),
+                            _GoalOption(
+                              label: s.getFitter,
+                              isSelected: _selectedGoal == Goal.getFitter,
+                              onTap: () => _onGoalTap(Goal.getFitter),
+                            ),
+                            const SizedBox(height: AppSize.s12),
+                            _GoalOption(
+                              label: s.gainMoreFlexible,
+                              isSelected:
+                              _selectedGoal == Goal.gainMoreFlexible,
+                              onTap: () =>
+                                  _onGoalTap(Goal.gainMoreFlexible),
+                            ),
+                            const SizedBox(height: AppSize.s12),
+                            _GoalOption(
+                              label: s.learnTheBasics,
+                              isSelected:
+                              _selectedGoal == Goal.learnTheBasics,
+                              onTap: () => _onGoalTap(Goal.learnTheBasics),
+                            ),
+                            const SizedBox(height: AppSize.s20),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed:
+                                _canContinue ? _onNextPressed : null,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _canContinue
+                                      ? AppColors.primary
+                                      : AppColors.neutral300,
+                                  disabledBackgroundColor:
+                                  AppColors.neutral300,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: AppPadding.p12,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                      RadiusSize.r100,
+                                    ),
+                                  ),
                                 ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    RadiusSize.r100,
+                                child: Text(
+                                  s.next,
+                                  style: const TextStyle(
+                                    color: AppColors.white,
+                                    fontFamily: FontConstants.balooThambi2,
+                                    fontWeight: FontWeightManager.bold,
+                                    fontSize: FontSize.s14,
                                   ),
                                 ),
                               ),
-                              child: Text(
-                                s.next,
-                                style: const TextStyle(
-                                  color: AppColors.white,
-                                  fontFamily: FontConstants.balooThambi2,
-                                  fontWeight: FontWeightManager.bold,
-                                  fontSize: FontSize.s16,
-                                ),
-                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -254,8 +268,8 @@ class _BackButton extends StatelessWidget {
       onTap: onTap,
       customBorder: const CircleBorder(),
       child: Container(
-        width: AppSize.s40,
-        height: AppSize.s40,
+        width: 32,
+        height: 32,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: AppColors.primary,
@@ -264,15 +278,13 @@ class _BackButton extends StatelessWidget {
         child: const Icon(
           Icons.arrow_back_ios_new,
           color: AppColors.white,
-          size: AppSize.s16,
+          size: FontSize.s12,
         ),
       ),
     );
   }
 }
 
-/// Small circular-progress + fraction label used as the step indicator
-/// (e.g. the "5/6" badge with an orange arc ring around it).
 class _StepProgressIndicator extends StatelessWidget {
   const _StepProgressIndicator({
     required this.step,
@@ -304,7 +316,7 @@ class _StepProgressIndicator extends StatelessWidget {
             color: AppColors.primary,
             fontFamily: FontConstants.balooThambi2,
             fontWeight: FontWeightManager.bold,
-            fontSize: FontSize.s14,
+            fontSize: FontSize.s12,
           ),
         ),
       ],
@@ -312,7 +324,6 @@ class _StepProgressIndicator extends StatelessWidget {
   }
 }
 
-/// A single pill-shaped, radio-style goal row.
 class _GoalOption extends StatelessWidget {
   const _GoalOption({
     required this.label,
@@ -328,13 +339,15 @@ class _GoalOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: const BorderRadius.all(Radius.circular(RadiusSize.r100)),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(RadiusSize.r100),
+      ),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         width: double.infinity,
         padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p20,
-          vertical: AppPadding.p16,
+          horizontal: AppPadding.p16,
+          vertical: AppPadding.p12,
         ),
         decoration: BoxDecoration(
           color: isSelected
@@ -358,7 +371,7 @@ class _GoalOption extends StatelessWidget {
                   color: AppColors.white,
                   fontFamily: FontConstants.balooThambi2,
                   fontWeight: FontWeightManager.bold,
-                  fontSize: FontSize.s14,
+                  fontSize: FontSize.s12,
                 ),
               ),
             ),
@@ -380,8 +393,8 @@ class _RadioCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      width: AppSize.s20,
-      height: AppSize.s20,
+      width: AppSize.s16,
+      height: AppSize.s16,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -392,8 +405,8 @@ class _RadioCircle extends StatelessWidget {
       ),
       child: isSelected
           ? Container(
-        width: AppSize.s12,
-        height: AppSize.s12,
+        width: AppSize.s8,
+        height: AppSize.s8,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: AppColors.primary,

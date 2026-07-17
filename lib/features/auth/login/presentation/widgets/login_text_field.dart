@@ -4,8 +4,6 @@ import '../../../../../core/constants/color_manager.dart';
 import '../../../../../core/constants/font_manager.dart';
 import '../../../../../core/constants/values_manager.dart';
 
-
-
 class LoginTextField extends StatelessWidget {
   const LoginTextField({
     required this.controller,
@@ -39,18 +37,31 @@ class LoginTextField extends StatelessWidget {
       style: const TextStyle(
         color: AppColors.white,
         fontFamily: FontConstants.balooThambi2,
-        fontSize: FontSize.s16,
+        fontSize: FontSize.s14,
       ),
       cursorColor: AppColors.primary,
       decoration: InputDecoration(
+        isDense: true,
         hintText: hintText,
         hintStyle: const TextStyle(
           color: AppColors.neutral400,
           fontFamily: FontConstants.balooThambi2,
-          fontSize: FontSize.s16,
+          fontSize: FontSize.s12,
         ),
-        prefixIcon: Icon(prefixIcon, color: AppColors.neutral400),
+        prefixIcon: Icon(
+          prefixIcon,
+          size: AppSize.s18,
+          color: AppColors.neutral400,
+        ),
+        prefixIconConstraints: const BoxConstraints(
+          minWidth: AppSize.s42,
+          minHeight: AppSize.s42,
+        ),
         suffixIcon: suffixIcon,
+        suffixIconConstraints: const BoxConstraints(
+          minWidth: AppSize.s42,
+          minHeight: AppSize.s42,
+        ),
         filled: true,
         fillColor: AppColors.white.withAlpha(15),
         errorStyle: const TextStyle(
@@ -59,16 +70,20 @@ class LoginTextField extends StatelessWidget {
           fontSize: FontSize.s12,
         ),
         contentPadding: const EdgeInsets.symmetric(
-          vertical: AppPadding.p16,
-          horizontal: AppPadding.p12,
+          vertical: AppPadding.p12,
+          horizontal: AppPadding.p8,
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(RadiusSize.r100),
-          borderSide: BorderSide(color: AppColors.white.withAlpha(40)),
+          borderSide: BorderSide(
+            color: AppColors.white.withAlpha(40),
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(RadiusSize.r100),
-          borderSide: BorderSide(color: AppColors.white.withAlpha(40)),
+          borderSide: BorderSide(
+            color: AppColors.white.withAlpha(40),
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(RadiusSize.r100),
@@ -79,11 +94,15 @@ class LoginTextField extends StatelessWidget {
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(RadiusSize.r100),
-          borderSide: const BorderSide(color: AppColors.primaryLight4),
+          borderSide: const BorderSide(
+            color: AppColors.primaryLight4,
+          ),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(RadiusSize.r100),
-          borderSide: const BorderSide(color: AppColors.primaryLight4),
+          borderSide: const BorderSide(
+            color: AppColors.primaryLight4,
+          ),
         ),
       ),
     );

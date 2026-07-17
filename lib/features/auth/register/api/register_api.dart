@@ -15,5 +15,7 @@ abstract class RegisterApi {
   factory RegisterApi(Dio dio) = _RegisterApi;
 
   @POST(ApiEndpoints.signUp)
-  Future<RegisterResponseModel> signUp(@Body() Map<String, dynamic> body);
+  Future<RegisterResponseModel> signUp(
+      @Body() Map<String, dynamic> body,
+      );
 }

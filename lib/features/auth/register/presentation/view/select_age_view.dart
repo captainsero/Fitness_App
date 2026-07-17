@@ -10,16 +10,9 @@ import '../../../../../core/router/route_path.dart';
 import '../../../../../generated/l10n.dart';
 import '../models/register_form_data.dart';
 
-/// Onboarding step 2/6 - age selection.
-///
-/// Records the chosen age onto [formData] and carries it forward to the
-/// weight step -- the actual `POST /auth/signup` call happens once every
-/// onboarding field is known, on the final step (SelectActivityLevelView).
 class SelectAgeView extends StatefulWidget {
   const SelectAgeView({super.key, this.formData});
 
-  /// Data collected on the previous screens. Null if this screen was
-  /// reached directly rather than via the normal flow.
   final RegisterFormData? formData;
 
   @override
@@ -66,7 +59,7 @@ class _SelectAgeViewState extends State<SelectAgeView> {
             child: Image.asset(
               AssetsConst.loginBackground,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) =>
+              errorBuilder: (_, __, ___) =>
               const ColoredBox(color: AppColors.backgroundDark),
             ),
           ),
@@ -76,22 +69,21 @@ class _SelectAgeViewState extends State<SelectAgeView> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppColors.black.withAlpha(140),
-                  AppColors.black.withAlpha(210),
-                  AppColors.black.withAlpha(245),
+                  AppColors.black.withAlpha(105),
+                  AppColors.black.withAlpha(165),
+                  AppColors.black.withAlpha(205),
                 ],
               ),
             ),
           ),
-          Column(
-            children: [
-              SafeArea(
-                bottom: false,
-                child: Padding(
+          SafeArea(
+            child: Column(
+              children: [
+                Padding(
                   padding: const EdgeInsets.fromLTRB(
-                    AppPadding.p20,
-                    AppPadding.p12,
-                    AppPadding.p20,
+                    AppPadding.p16,
+                    AppPadding.p16,
+                    AppPadding.p16,
                     0,
                   ),
                   child: Column(
@@ -103,26 +95,21 @@ class _SelectAgeViewState extends State<SelectAgeView> {
                             child: Center(
                               child: Image.asset(
                                 AssetsConst.logo,
-                                height: AppSize.s50,
-                                errorBuilder:
-                                    (context, error, stackTrace) =>
-                                const SizedBox(height: AppSize.s50),
+                                height: AppSize.s48,
+                                errorBuilder: (_, __, ___) =>
+                                const SizedBox(height: AppSize.s48),
                               ),
                             ),
                           ),
-                          const SizedBox(width: AppSize.s40),
+                          const SizedBox(width: 32),
                         ],
                       ),
-                      const SizedBox(height: AppSize.s16),
-                      Text(
-                        s.onboardingStepIndicator(2, 6),
-                        style: const TextStyle(
-                          color: AppColors.white,
-                          fontFamily: FontConstants.balooThambi2,
-                          fontSize: FontSize.s14,
-                        ),
+                      const SizedBox(height: AppSize.s12),
+                      const _StepProgressIndicator(
+                        step: 2,
+                        totalSteps: 6,
                       ),
-                      const SizedBox(height: AppSize.s24),
+                      const SizedBox(height: AppSize.s20),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -131,11 +118,11 @@ class _SelectAgeViewState extends State<SelectAgeView> {
                             color: AppColors.white,
                             fontFamily: FontConstants.balooThambi2,
                             fontWeight: FontWeightManager.bold,
-                            fontSize: FontSize.s22,
+                            fontSize: FontSize.s20,
                           ),
                         ),
                       ),
-                      const SizedBox(height: AppSize.s8),
+                      const SizedBox(height: AppSize.s4),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
@@ -143,92 +130,93 @@ class _SelectAgeViewState extends State<SelectAgeView> {
                           style: const TextStyle(
                             color: AppColors.white,
                             fontFamily: FontConstants.balooThambi2,
-                            fontSize: FontSize.s14,
+                            fontSize: FontSize.s12,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(top: AppSize.s24),
-                  padding: EdgeInsets.fromLTRB(
-                    0,
-                    AppPadding.p40,
-                    0,
-                    AppPadding.p20 + MediaQuery.of(context).padding.bottom,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: Color(0x1AFFFFFF),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(RadiusSize.r30),
-                      topRight: Radius.circular(RadiusSize.r30),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        s.year,
-                        style: const TextStyle(
-                          color: AppColors.primary,
-                          fontFamily: FontConstants.balooThambi2,
-                          fontWeight: FontWeightManager.bold,
-                          fontSize: FontSize.s14,
+                const SizedBox(height: AppSize.s20),
+                ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(RadiusSize.r50)),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.fromLTRB(
+                        AppPadding.p20,
+                        AppPadding.p24,
+                        AppPadding.p20,
+                        AppPadding.p16 + MediaQuery.of(context).padding.bottom,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.neutral900.withAlpha(105),
+                        borderRadius: const BorderRadius.all(Radius.circular(RadiusSize.r50)),
+                        border: Border.all(
+                          color: AppColors.white.withAlpha(35),
                         ),
                       ),
-                      const SizedBox(height: AppSize.s16),
-                      _AgePicker(
-                        minAge: _minAge,
-                        maxAge: _maxAge,
-                        initialAge: _initialAge,
-                        onChanged: _onAgeChanged,
-                      ),
-                      const SizedBox(height: AppSize.s4),
-                      const Icon(
-                        Icons.arrow_drop_up,
-                        color: AppColors.primary,
-                        size: AppSize.s30,
-                      ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppPadding.p30,
-                        ),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: _onNextPressed,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: AppPadding.p16,
+                      child: Column(
+                        children: [
+                          Text(
+                            s.year,
+                            style: const TextStyle(
+                              color: AppColors.primary,
+                              fontFamily: FontConstants.balooThambi2,
+                              fontWeight: FontWeightManager.bold,
+                              fontSize: FontSize.s12,
+                            ),
+                          ),
+                          const SizedBox(height: AppSize.s12),
+                          _AgePicker(
+                            minAge: _minAge,
+                            maxAge: _maxAge,
+                            initialAge: _initialAge,
+                            onChanged: _onAgeChanged,
+                          ),
+                          const SizedBox(height: AppSize.s4),
+                          const Icon(
+                            Icons.arrow_drop_up,
+                            color: AppColors.primary,
+                            size: AppSize.s24,
+                          ),
+                          const SizedBox(
+                            height: AppSize.s24,
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: _onNextPressed,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: AppPadding.p12,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    RadiusSize.r100,
+                                  ),
+                                ),
                               ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  RadiusSize.r100,
+                              child: Text(
+                                s.next,
+                                style: const TextStyle(
+                                  color: AppColors.white,
+                                  fontFamily: FontConstants.balooThambi2,
+                                  fontWeight: FontWeightManager.bold,
+                                  fontSize: FontSize.s14,
                                 ),
                               ),
                             ),
-                            child: Text(
-                              s.next,
-                              style: const TextStyle(
-                                color: AppColors.white,
-                                fontFamily: FontConstants.balooThambi2,
-                                fontWeight: FontWeightManager.bold,
-                                fontSize: FontSize.s16,
-                              ),
-                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -247,8 +235,8 @@ class _BackButton extends StatelessWidget {
       onTap: onTap,
       customBorder: const CircleBorder(),
       child: Container(
-        width: AppSize.s40,
-        height: AppSize.s40,
+        width: 32,
+        height: 32,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: AppColors.primary,
@@ -257,15 +245,50 @@ class _BackButton extends StatelessWidget {
         child: const Icon(
           Icons.arrow_back_ios_new,
           color: AppColors.white,
-          size: AppSize.s16,
+          size: FontSize.s12,
         ),
       ),
     );
   }
 }
+class _StepProgressIndicator extends StatelessWidget {
+  const _StepProgressIndicator({
+    required this.step,
+    required this.totalSteps,
+  });
 
-/// Horizontal, snapping age wheel: the centered number is large and
-/// highlighted, with neighboring numbers shrinking/fading by distance.
+  final int step;
+  final int totalSteps;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: AppSize.s16,
+          height: AppSize.s16,
+          child: CircularProgressIndicator(
+            value: step / totalSteps,
+            strokeWidth: 2,
+            color: AppColors.primary,
+            backgroundColor: AppColors.white.withAlpha(60),
+          ),
+        ),
+        const SizedBox(width: AppSize.s4),
+        Text(
+          '$step/$totalSteps',
+          style: const TextStyle(
+            color: AppColors.primary,
+            fontFamily: FontConstants.balooThambi2,
+            fontWeight: FontWeightManager.bold,
+            fontSize: FontSize.s12,
+          ),
+        ),
+      ],
+    );
+  }
+}
 class _AgePicker extends StatefulWidget {
   const _AgePicker({
     required this.minAge,
@@ -284,8 +307,8 @@ class _AgePicker extends StatefulWidget {
 }
 
 class _AgePickerState extends State<_AgePicker> {
-  static const double _itemWidth = 80;
-  static const double _pickerHeight = 70;
+  static const double _itemWidth = 70;
+  static const double _pickerHeight = 62;
 
   late final PageController _controller;
   late int _selectedIndex;
@@ -302,10 +325,12 @@ class _AgePickerState extends State<_AgePicker> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+
     if (_controllerReady) return;
 
     final screenWidth = MediaQuery.of(context).size.width;
     final fraction = (_itemWidth / screenWidth).clamp(0.05, 1.0);
+
     _controller = PageController(
       viewportFraction: fraction,
       initialPage: _selectedIndex,
@@ -361,7 +386,7 @@ class _AgePickerState extends State<_AgePicker> {
                         fontWeight: isSelected
                             ? FontWeightManager.bold
                             : FontWeightManager.regular,
-                        fontSize: isSelected ? FontSize.s44 : FontSize.s33,
+                        fontSize: isSelected ? 38 : 28,
                       ),
                     ),
                   ),

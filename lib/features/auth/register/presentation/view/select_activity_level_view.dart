@@ -14,7 +14,6 @@ import '../models/register_form_data.dart';
 import '../view_model/register_cubit.dart';
 import '../view_model/register_state.dart';
 
-/// Activity-level options for the final onboarding step.
 enum ActivityLevel {
   sedentary,
   lightlyActive,
@@ -23,9 +22,6 @@ enum ActivityLevel {
   extraActive,
 }
 
-/// Maps each [ActivityLevel] to the string value the
-/// `POST /auth/signup` API expects ("level1".."level5"), since the API
-/// does not accept the Dart enum names directly.
 extension ActivityLevelApiValue on ActivityLevel {
   String get apiValue {
     switch (this) {
@@ -43,21 +39,9 @@ extension ActivityLevelApiValue on ActivityLevel {
   }
 }
 
-/// Onboarding step 6/6 - activity level selection.
-///
-/// This is the last field `POST /auth/signup` needs, so this is where the
-/// account actually gets created: [formData] carries every field collected
-/// across the whole flow (name/email/password/gender/age/weight/height/
-/// goal), and the activity level picked here completes it. Pressing "Next"
-/// calls [RegisterCubit.register] for real; the flow only lands in the app
-/// once signup succeeds.
 class SelectActivityLevelView extends StatelessWidget {
   const SelectActivityLevelView({super.key, this.formData});
 
-  /// Data collected on the previous screens. Null if this screen was
-  /// reached directly (e.g. deep link / dev testing) rather than via the
-  /// normal onboarding flow -- in that case there's nothing valid to sign
-  /// up with, so "Next" is disabled entirely.
   final RegisterFormData? formData;
 
   @override
@@ -84,6 +68,7 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
 
   bool get _canContinue {
     final data = widget.formData;
+
     return _selectedActivityLevel != null &&
         data != null &&
         data.gender != null &&
@@ -106,6 +91,7 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
   void _onNextPressed() {
     final data = widget.formData;
     final activityLevel = _selectedActivityLevel;
+
     if (!_canContinue || data == null || activityLevel == null) return;
 
     context.read<RegisterCubit>().register(
@@ -131,7 +117,7 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
       body: BlocListener<RegisterCubit, RegisterState>(
         listener: (context, state) {
           if (state.data != null) {
-            context.go(RoutePath.exploreRoute);
+            context.go(RoutePath.loginRoute);
           } else if (state.errorMessage != null) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
@@ -151,7 +137,7 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
               child: Image.asset(
                 AssetsConst.loginBackground,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) =>
+                errorBuilder: (_, __, ___) =>
                 const ColoredBox(color: AppColors.backgroundDark),
               ),
             ),
@@ -161,21 +147,23 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.black.withAlpha(140),
-                    AppColors.black.withAlpha(210),
-                    AppColors.black.withAlpha(245),
+                    AppColors.black.withAlpha(105),
+                    AppColors.black.withAlpha(165),
+                    AppColors.black.withAlpha(205),
                   ],
                 ),
               ),
             ),
             SafeArea(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(top: AppPadding.p12),
+                padding: const EdgeInsets.symmetric(
+                  vertical: AppPadding.p16,
+                ),
                 child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: AppPadding.p20,
+                        horizontal: AppPadding.p16,
                       ),
                       child: Column(
                         children: [
@@ -186,22 +174,21 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                                 child: Center(
                                   child: Image.asset(
                                     AssetsConst.logo,
-                                    height: AppSize.s50,
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                    const SizedBox(height: AppSize.s50),
+                                    height: AppSize.s48,
+                                    errorBuilder: (_, __, ___) =>
+                                    const SizedBox(height: AppSize.s48),
                                   ),
                                 ),
                               ),
                               const SizedBox(width: AppSize.s40),
                             ],
                           ),
-                          const SizedBox(height: AppSize.s16),
+                          const SizedBox(height: AppSize.s12),
                           const _StepProgressIndicator(
                             step: 6,
                             totalSteps: 6,
                           ),
-                          const SizedBox(height: AppSize.s24),
+                          const SizedBox(height: AppSize.s20),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
@@ -210,11 +197,11 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                                 color: AppColors.white,
                                 fontFamily: FontConstants.balooThambi2,
                                 fontWeight: FontWeightManager.bold,
-                                fontSize: FontSize.s22,
+                                fontSize: FontSize.s20,
                               ),
                             ),
                           ),
-                          const SizedBox(height: AppSize.s8),
+                          const SizedBox(height: AppSize.s4),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
@@ -222,131 +209,130 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                               style: const TextStyle(
                                 color: AppColors.white,
                                 fontFamily: FontConstants.balooThambi2,
-                                fontSize: FontSize.s14,
+                                fontSize: FontSize.s12,
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(
-                        AppPadding.p20,
-                        AppPadding.p30,
-                        AppPadding.p20,
-                        AppPadding.p20,
+                    const SizedBox(height: AppSize.s20),
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(RadiusSize.r30),
                       ),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: AppPadding.p26,
-                          horizontal: AppPadding.p16,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.neutral900.withAlpha(115),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(RadiusSize.r30),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(AppPadding.p20),
+                          decoration: BoxDecoration(
+                            color: AppColors.neutral900.withAlpha(105),
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(RadiusSize.r30),
+                            ),
+                            border: Border.all(
+                              color: AppColors.white.withAlpha(35),
+                            ),
                           ),
-                          border: Border.all(
-                            color: AppColors.white.withAlpha(25),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            _ActivityLevelOption(
-                              label: s.sedentary,
-                              isSelected: _selectedActivityLevel ==
+                          child: Column(
+                            children: [
+                              _ActivityLevelOption(
+                                label: s.sedentary,
+                                isSelected: _selectedActivityLevel ==
+                                    ActivityLevel.sedentary,
+                                onTap: () => _onActivityLevelTap(
                                   ActivityLevel.sedentary,
-                              onTap: () => _onActivityLevelTap(
-                                ActivityLevel.sedentary,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: AppSize.s16),
-                            _ActivityLevelOption(
-                              label: s.lightlyActive,
-                              isSelected: _selectedActivityLevel ==
+                              const SizedBox(height: AppSize.s12),
+                              _ActivityLevelOption(
+                                label: s.lightlyActive,
+                                isSelected: _selectedActivityLevel ==
+                                    ActivityLevel.lightlyActive,
+                                onTap: () => _onActivityLevelTap(
                                   ActivityLevel.lightlyActive,
-                              onTap: () => _onActivityLevelTap(
-                                ActivityLevel.lightlyActive,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: AppSize.s16),
-                            _ActivityLevelOption(
-                              label: s.moderatelyActive,
-                              isSelected: _selectedActivityLevel ==
+                              const SizedBox(height: AppSize.s12),
+                              _ActivityLevelOption(
+                                label: s.moderatelyActive,
+                                isSelected: _selectedActivityLevel ==
+                                    ActivityLevel.moderatelyActive,
+                                onTap: () => _onActivityLevelTap(
                                   ActivityLevel.moderatelyActive,
-                              onTap: () => _onActivityLevelTap(
-                                ActivityLevel.moderatelyActive,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: AppSize.s16),
-                            _ActivityLevelOption(
-                              label: s.veryActive,
-                              isSelected: _selectedActivityLevel ==
+                              const SizedBox(height: AppSize.s12),
+                              _ActivityLevelOption(
+                                label: s.veryActive,
+                                isSelected: _selectedActivityLevel ==
+                                    ActivityLevel.veryActive,
+                                onTap: () => _onActivityLevelTap(
                                   ActivityLevel.veryActive,
-                              onTap: () => _onActivityLevelTap(
-                                ActivityLevel.veryActive,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: AppSize.s16),
-                            _ActivityLevelOption(
-                              label: s.extraActive,
-                              isSelected: _selectedActivityLevel ==
+                              const SizedBox(height: AppSize.s12),
+                              _ActivityLevelOption(
+                                label: s.extraActive,
+                                isSelected: _selectedActivityLevel ==
+                                    ActivityLevel.extraActive,
+                                onTap: () => _onActivityLevelTap(
                                   ActivityLevel.extraActive,
-                              onTap: () => _onActivityLevelTap(
-                                ActivityLevel.extraActive,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: AppSize.s25),
-                            BlocBuilder<RegisterCubit, RegisterState>(
-                              builder: (context, state) {
-                                final isLoading = state.isLoading ?? false;
-                                final enabled = _canContinue && !isLoading;
-                                return SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed:
-                                        enabled ? _onNextPressed : null,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: enabled
-                                          ? AppColors.primary
-                                          : AppColors.neutral300,
-                                      disabledBackgroundColor:
-                                      AppColors.neutral300,
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: AppPadding.p16,
+                              const SizedBox(height: AppSize.s20),
+                              BlocBuilder<RegisterCubit, RegisterState>(
+                                builder: (context, state) {
+                                  final isLoading = state.isLoading ?? false;
+                                  final enabled = _canContinue && !isLoading;
+
+                                  return SizedBox(
+                                    width: double.infinity,
+                                    child: ElevatedButton(
+                                      onPressed:
+                                      enabled ? _onNextPressed : null,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: enabled
+                                            ? AppColors.primary
+                                            : AppColors.neutral300,
+                                        disabledBackgroundColor:
+                                        AppColors.neutral300,
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: AppPadding.p12,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            RadiusSize.r100,
+                                          ),
+                                        ),
                                       ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          RadiusSize.r100,
+                                      child: isLoading
+                                          ? const SizedBox(
+                                        height: AppSize.s18,
+                                        width: AppSize.s18,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: AppSize.s2,
+                                          color: AppColors.white,
+                                        ),
+                                      )
+                                          : Text(
+                                        s.next,
+                                        style: const TextStyle(
+                                          color: AppColors.white,
+                                          fontFamily:
+                                          FontConstants.balooThambi2,
+                                          fontWeight:
+                                          FontWeightManager.bold,
+                                          fontSize: FontSize.s14,
                                         ),
                                       ),
                                     ),
-                                    child: isLoading
-                                        ? const SizedBox(
-                                      height: AppSize.s20,
-                                      width: AppSize.s20,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: AppSize.s2,
-                                        color: AppColors.white,
-                                      ),
-                                    )
-                                        : Text(
-                                      s.next,
-                                      style: const TextStyle(
-                                        color: AppColors.white,
-                                        fontFamily:
-                                        FontConstants.balooThambi2,
-                                        fontWeight:
-                                        FontWeightManager.bold,
-                                        fontSize: FontSize.s16,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -372,8 +358,8 @@ class _BackButton extends StatelessWidget {
       onTap: onTap,
       customBorder: const CircleBorder(),
       child: Container(
-        width: AppSize.s40,
-        height: AppSize.s40,
+        width: AppSize.s32,
+        height: AppSize.s32,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: AppColors.primary,
@@ -382,15 +368,13 @@ class _BackButton extends StatelessWidget {
         child: const Icon(
           Icons.arrow_back_ios_new,
           color: AppColors.white,
-          size: AppSize.s16,
+          size: FontSize.s12,
         ),
       ),
     );
   }
 }
 
-/// Small circular-progress + fraction label used as the step indicator
-/// (e.g. the "6/6" badge with an orange arc ring around it).
 class _StepProgressIndicator extends StatelessWidget {
   const _StepProgressIndicator({
     required this.step,
@@ -422,7 +406,7 @@ class _StepProgressIndicator extends StatelessWidget {
             color: AppColors.primary,
             fontFamily: FontConstants.balooThambi2,
             fontWeight: FontWeightManager.bold,
-            fontSize: FontSize.s14,
+            fontSize: FontSize.s12,
           ),
         ),
       ],
@@ -430,8 +414,6 @@ class _StepProgressIndicator extends StatelessWidget {
   }
 }
 
-/// A single pill-shaped, radio-style activity-level row. Same shape as
-/// the goal options in SelectGoalView.
 class _ActivityLevelOption extends StatelessWidget {
   const _ActivityLevelOption({
     required this.label,
@@ -447,13 +429,15 @@ class _ActivityLevelOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: const BorderRadius.all(Radius.circular(RadiusSize.r100)),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(RadiusSize.r100),
+      ),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         width: double.infinity,
         padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p20,
-          vertical: AppPadding.p16,
+          horizontal: AppPadding.p16,
+          vertical: AppPadding.p12,
         ),
         decoration: BoxDecoration(
           color: isSelected
@@ -477,7 +461,7 @@ class _ActivityLevelOption extends StatelessWidget {
                   color: AppColors.white,
                   fontFamily: FontConstants.balooThambi2,
                   fontWeight: FontWeightManager.bold,
-                  fontSize: FontSize.s14,
+                  fontSize: FontSize.s12,
                 ),
               ),
             ),
@@ -499,8 +483,8 @@ class _RadioCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      width: AppSize.s20,
-      height: AppSize.s20,
+      width: AppSize.s16,
+      height: AppSize.s16,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -511,8 +495,8 @@ class _RadioCircle extends StatelessWidget {
       ),
       child: isSelected
           ? Container(
-        width: AppSize.s12,
-        height: AppSize.s12,
+        width: AppSize.s8,
+        height: AppSize.s8,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: AppColors.primary,
