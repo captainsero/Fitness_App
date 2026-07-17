@@ -164,7 +164,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 4));
     if (mounted) {
-      context.go(RoutePath.exploreRoute);
+      context.go(RoutePath.onBoardingRoute);
     }
   }
 

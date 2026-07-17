@@ -71,4 +71,11 @@ abstract class AssetsConst {
   static const String workoutsIcon = 'assets/icons/gym.svg';
   static const String profileIcon = 'assets/icons/profile.svg';
   static const String logo = 'assets/images/logo.png';
+
+  //!  Onboarding Images
+  static const String onBoardingBackGround =
+      'assets/images/onBoardingBackGround.png';
+  static const String onBoardingImage1 = 'assets/images/onboardingimage1.png';
+  static const String onBoardingImage2 = 'assets/images/onboardingimage2.png';
+  static const String onBoardingImage3 = 'assets/images/onboardingimage3.png';
 }

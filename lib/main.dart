@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenSize.intial(context);
     return MaterialApp.router(
-      title: 'Tracking App',
+      title: 'Fitness App',
       debugShowCheckedModeBanner: false,
       locale: const Locale('en'),
       localizationsDelegates: const [
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       routerConfig: AppRouter.goRouter,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
     );
   }
 }

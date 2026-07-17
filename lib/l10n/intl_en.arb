@@ -29,5 +29,9 @@
     "fitnessApp": "Fitness App",
     "loading": "Loading...",
     "your_fitness_journey_starts_here": "Your fitness journey starts here",
-    "VersionNumber": "Version 1.0.0"
+    "VersionNumber": "Version 1.0.0",
+    "onboarding_title_1": "The Price Of Excellence\nIs Discipline",
+    "onboarding_title_2": "Fitness Has Never Been\nSo Much Fun",
+    "onboarding_title_3": "NO MORE EXCUSES\nDo It Now",
+    "onboarding_description": "Lorem Ipsum Dolor Sit Amet Consectetur. Eu Urna Ut Gravida Quis Id Pretium Purus. Mauris Massa"
 }

@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import '../../features/error/presentation/view/error_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
+import '../../features/on_boarding/presentation/views/screen/on_boarding_screen.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 import '../../features/smart_coach/presentation/view/smart_coach_view.dart';
 import '../../features/splash/presentation/view/pages/splash_page.dart';
@@ -14,6 +15,10 @@ abstract class AppRouter {
       GoRoute(
         path: RoutePath.splashRoute,
         builder: (context, state) => const SplashPage(),
+      ),
+      GoRoute(
+        path: RoutePath.onBoardingRoute,
+        builder: (context, state) => const OnBoardingScreen(),
       ),
       GoRoute(
         path: RoutePath.exploreRoute,
