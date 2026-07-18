@@ -13,6 +13,8 @@ import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../features/auth/forgot_password/api/api_client/forgot_password_api_client.dart'
+    as _i481;
 import '../auth_interceptor/auth_interceptor.dart' as _i988;
 import '../dio/dio_module.dart' as _i977;
 import '../services/launcher_service/launcher_service.dart' as _i293;
@@ -35,6 +37,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i988.AuthInterceptor(gh<_i349.SecureStorageService>()),
     );
     gh.singleton<_i361.Dio>(() => dioModule.dio(gh<_i988.AuthInterceptor>()));
+    gh.lazySingleton<_i481.ForgotPasswordApiClient>(
+      () => _i481.ForgotPasswordApiClient(gh<_i361.Dio>()),
+    );
     return this;
   }
 }

@@ -6,13 +6,13 @@ import '../../data/models/forgot_password_response.dart';
 import '../repo/forgot_pass_repo_contract.dart';
 
 @injectable
-class ForgotPassUseCase {
-  ForgotPassUseCase(this._repo);
+class ForgotPasswordUseCase {
+  ForgotPasswordUseCase(this._repo);
 
-  final ForgotPassRepoContract _repo;
+  final ForgotPasswordRepoContract _repo;
 
   Future<BaseResponse<ForgotPasswordResponse>> forgotPassword(
-    ForgotPassRequest request,
+    ForgotPasswordRequest request,
   ) async {
     return _repo.forgotPassword(request);
   }
