@@ -5,4 +5,5 @@ abstract class RoutePath {
   static const String smartCouchRoute = '/smartCouch';
   static const String workoutsRoute = '/workouts';
   static const String profileRoute = '/profile';
+  static const String loginRoute = '/login';
 }

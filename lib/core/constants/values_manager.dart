@@ -78,4 +78,10 @@ abstract class AssetsConst {
   static const String onBoardingImage1 = 'assets/images/onboardingimage1.png';
   static const String onBoardingImage2 = 'assets/images/onboardingimage2.png';
   static const String onBoardingImage3 = 'assets/images/onboardingimage3.png';
+
+  //login
+  static const String googleIcon = 'assets/images/Google.png';
+  static const String appleIcon = 'assets/images/Apple.png';
+  static const String facebookIcon = 'assets/images/facebook circle.png';
+  static const String loginBackground = 'assets/images/Login.png';
 }

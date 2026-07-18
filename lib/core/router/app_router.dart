@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import '../../features/auth/login/presentation/view/login_view.dart';
 import '../../features/error/presentation/view/error_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
 import '../../features/on_boarding/presentation/views/screen/on_boarding_screen.dart';
@@ -35,6 +36,10 @@ abstract class AppRouter {
       GoRoute(
         path: RoutePath.profileRoute,
         builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        path: RoutePath.loginRoute,
+        builder: (context, state) => const LoginView(),
       ),
     ],
     errorBuilder: (context, state) {
