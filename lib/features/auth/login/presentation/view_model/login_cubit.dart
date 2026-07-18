@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../config/base_state/base_state.dart';
-import '../../../../../config/handler/response_to_state_mapper.dart' show ResponseToStateMapper;
 
+import '../../../../../config/handler/response_to_state_mapper.dart';
 import '../../domain/repositories/login_repository.dart';
 import 'login_state.dart';
 

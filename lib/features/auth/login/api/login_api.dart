@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 
-import '../../../../core/constants/api_constants/api_endpoints.dart' show ApiEndpoints;
+import '../../../../core/constants/api_constants/api_endpoints.dart';
 import '../data/models/login_response_model.dart';
 
 part 'login_api.g.dart';

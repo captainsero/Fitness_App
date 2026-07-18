@@ -14,6 +14,7 @@ abstract class FontWeightManager {
 
 abstract class FontSize {
   static const double s10 = 10;
+  static const double s11 = 11;
   static const double s12 = 12;
   static const double s12c = 12;
   static const double s14 = 14;
@@ -25,7 +26,9 @@ abstract class FontSize {
   static const double s24 = 24;
   static const double s25 = 25;
   static const double s30 = 30;
+  static const double s33 = 33;
   static const double s35 = 35;
   static const double s40 = 40;
+  static const double s44 = 44;
   static const double s48 = 48;
 }
