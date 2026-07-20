@@ -7,7 +7,7 @@ class ExploreView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text('Explore'),
+        child: Text('Explore View'),
       ),
     );
   }
