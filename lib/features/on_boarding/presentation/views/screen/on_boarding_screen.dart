@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../../core/constants/values_manager.dart';
 import '../../../../../core/router/route_path.dart';
 import '../../../../../generated/l10n.dart';
@@ -52,7 +51,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      context.go(RoutePath.exploreRoute);
+      context.go(RoutePath.loginRoute);
     }
   }
 
@@ -65,8 +64,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     }
   }
 
-  void _navigateToExplore() {
-    context.go(RoutePath.exploreRoute);
+  void _navigateToLogin() {
+    context.go(RoutePath.loginRoute);
   }
 
   @override
@@ -85,7 +84,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           OnboardingSkipButton(
             currentIndex: _currentIndex,
             totalPages: _pages.length,
-            onSkip: _navigateToExplore,
+            onSkip: _navigateToLogin,
           ),
 
           OnboardingBottomPanel(
