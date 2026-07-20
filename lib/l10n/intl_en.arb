@@ -73,5 +73,9 @@
     "lightlyActive": "Lightly Active",
     "moderatelyActive": "Moderately Active",
     "veryActive": "Very Active",
-    "extraActive": "Extra Active"
+    "extraActive": "Extra Active",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "noExercisesFound": "No exercises found"
 }

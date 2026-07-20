@@ -13,6 +13,7 @@ abstract class RoutePath {
   static const String selectHeightRoute = '/select-height';
   static const String selectGoalRoute = '/select-goal';
   static const String selectActivityLevelRoute = '/select-activity-level';
+  static const String exerciseView = '/exercise';
 
 
 
