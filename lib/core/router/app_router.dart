@@ -10,6 +10,7 @@ import '../../features/auth/register/presentation/view/select_goal_view.dart';
 import '../../features/auth/register/presentation/view/select_height_view.dart';
 import '../../features/auth/register/presentation/view/select_weight_view.dart';
 import '../../features/error/presentation/view/error_view.dart';
+import '../../features/exercise/presentation/view/exercise_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
 import '../../features/on_boarding/presentation/views/screen/on_boarding_screen.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
@@ -20,7 +21,7 @@ import 'route_path.dart';
 
 abstract class AppRouter {
   static final GoRouter goRouter = GoRouter(
-    initialLocation: RoutePath.splashRoute,
+    initialLocation: RoutePath.exerciseView,
     routes: [
       GoRoute(
         path: RoutePath.splashRoute,
@@ -53,6 +54,9 @@ abstract class AppRouter {
       GoRoute(
         path: RoutePath.registerRoute,
         builder: (context, state) => const RegisterView(),
+      ),GoRoute(
+        path: RoutePath.exerciseView,
+        builder: (context, state) => const ExerciseView(),
       ),
       GoRoute(
         path: RoutePath.selectGenderRoute,
