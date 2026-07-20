@@ -5,4 +5,7 @@ import '../../data/models/muscles_group_model.dart';
 abstract class ExploreRepoContract {
   Future<BaseResponse<List<MuscleModel>>> getRandomMuscles();
   Future<BaseResponse<List<MusclesGroupModel>>> getMusclesGroup();
+  Future<BaseResponse<List<MuscleModel>>> getMusclesByMusclesGroup({
+    required String groupId,
+  });
 }

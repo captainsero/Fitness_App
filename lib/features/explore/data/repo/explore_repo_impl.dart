@@ -22,4 +22,11 @@ class ExploreRepoImpl implements ExploreRepoContract {
   Future<BaseResponse<List<MusclesGroupModel>>> getMusclesGroup() {
     return _remoteDataSourceContract.getMusclesGroup();
   }
+
+  @override
+  Future<BaseResponse<List<MuscleModel>>> getMusclesByMusclesGroup({
+    required String groupId,
+  }) {
+    return _remoteDataSourceContract.getMusclesByMusclesGroup(groupId: groupId);
+  }
 }

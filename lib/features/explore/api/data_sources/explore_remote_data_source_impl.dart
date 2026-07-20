@@ -35,4 +35,20 @@ class ExploreRemoteDataSourceImpl implements ExploreRemoteDataSourceContract {
       return ErrorBaseResponse<List<MusclesGroupModel>>(error: e);
     }
   }
+
+  @override
+  Future<BaseResponse<List<MuscleModel>>> getMusclesByMusclesGroup({
+    required String groupId,
+  }) async {
+    try {
+      final response = await _apiClient.getMusclesByMusclesGroup(
+        groupId: groupId,
+      );
+      return SuccessBaseResponse<List<MuscleModel>>(
+        data: response.muscles ?? [],
+      );
+    } catch (e) {
+      return ErrorBaseResponse<List<MuscleModel>>(error: e);
+    }
+  }
 }
