@@ -5,10 +5,7 @@ import '../../../../../core/constants/values_manager.dart';
 
 class FillingLogo extends StatelessWidget {
   const FillingLogo({
-    super.key,
-    required this.fillController,
-    required this.fillAnimation,
-    required this.shimmerController,
+    required this.fillController, required this.fillAnimation, required this.shimmerController, super.key,
   });
 
   final AnimationController fillController;

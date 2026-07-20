@@ -6,9 +6,6 @@ import '../../../../../core/constants/color_manager.dart';
 
 /// Animated floating particle widget
 class FloatingParticle extends StatelessWidget {
-  final Animation<double> animation;
-  final int index;
-  final Size size;
 
   const FloatingParticle({
     super.key,
@@ -16,6 +13,9 @@ class FloatingParticle extends StatelessWidget {
     required this.index,
     required this.size,
   });
+  final Animation<double> animation;
+  final int index;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {

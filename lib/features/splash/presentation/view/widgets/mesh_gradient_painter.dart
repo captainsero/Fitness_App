@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 
 /// Mesh gradient painter for premium animated background
 class MeshGradientPainter extends CustomPainter {
-  final double progress;
-  final Color primaryColor;
-  final int pointCount;
-  final double maxRadius;
-  final bool isDark;
 
   MeshGradientPainter({
     required this.progress,
@@ -17,6 +12,11 @@ class MeshGradientPainter extends CustomPainter {
     this.maxRadius = 0.4,
     this.isDark = false,
   });
+  final double progress;
+  final Color primaryColor;
+  final int pointCount;
+  final double maxRadius;
+  final bool isDark;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -35,15 +35,14 @@ class MeshGradientPainter extends CustomPainter {
       Offset(size.width * 0.5, size.height * 0.9),
     ];
 
-    for (int i = 0; i < points.length; i++) {
+    for (var i = 0; i < points.length; i++) {
       final point = points[i];
       final offset = math.sin(progress * math.pi * 2 + i) * 20;
       final adjustedPoint = Offset(point.dx + offset, point.dy);
 
       paint.shader =
           RadialGradient(
-            center: Alignment.center,
-            radius: 1.0,
+            radius: 1,
             colors: [
               primaryColor.withValues(alpha: baseOpacity),
               primaryColor.withValues(alpha: fadeOpacity),

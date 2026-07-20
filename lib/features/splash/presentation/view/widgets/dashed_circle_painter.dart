@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 
 /// Dashed circle painter for rotating ring effect
 class DashedCirclePainter extends CustomPainter {
-  final Color color;
-  final double strokeWidth;
-  final double dashLength;
-  final double gapLength;
 
   DashedCirclePainter({
     required this.color,
@@ -15,6 +11,10 @@ class DashedCirclePainter extends CustomPainter {
     this.dashLength = 8,
     this.gapLength = 6,
   });
+  final Color color;
+  final double strokeWidth;
+  final double dashLength;
+  final double gapLength;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -31,7 +31,7 @@ class DashedCirclePainter extends CustomPainter {
     final anglePerDash = 2 * math.pi / dashCount;
     final dashAngle = dashLength / radius;
 
-    for (int i = 0; i < dashCount; i++) {
+    for (var i = 0; i < dashCount; i++) {
       final startAngle = i * anglePerDash;
       canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),

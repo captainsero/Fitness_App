@@ -5,9 +5,7 @@ import '../../../../../generated/l10n.dart';
 
 class AppName extends StatelessWidget {
   const AppName({
-    super.key,
-    required this.titleOpacity,
-    required this.titleSlide,
+    required this.titleOpacity, required this.titleSlide, super.key,
   });
   final Animation<double> titleOpacity;
   final Animation<Offset> titleSlide;

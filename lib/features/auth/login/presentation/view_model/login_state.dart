@@ -1,5 +1,7 @@
 import '../../../../../config/base_state/base_state.dart';
+import '../../../../../config/handler/response_to_state_mapper.dart' show ResponseToStateMapper;
 import '../../domain/entities/user_entity.dart';
+import 'login_cubit.dart' show LoginCubit;
 
 /// State emitted by [LoginCubit].
 ///

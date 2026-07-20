@@ -10,17 +10,7 @@ import 'orbiting_dot.dart';
 
 class LogoSection extends StatelessWidget {
   const LogoSection({
-    super.key,
-    required this.rotateController,
-    required this.glowController,
-    required this.glowAnimation,
-    required this.pulseController,
-    required this.logoController,
-    required this.logoOpacity,
-    required this.logoScale,
-    required this.fillController,
-    required this.orbitController,
-    required this.shimmerController,
+    required this.rotateController, required this.glowController, required this.glowAnimation, required this.pulseController, required this.logoController, required this.logoOpacity, required this.logoScale, required this.fillController, required this.orbitController, required this.shimmerController, super.key,
   });
   final Animation<double> orbitController;
   final AnimationController rotateController;
@@ -57,9 +47,6 @@ class LogoSection extends StatelessWidget {
                   size: const Size(260, 260),
                   painter: DashedCirclePainter(
                     color: AppColors.primary.withValues(alpha: 0.15),
-                    strokeWidth: 1.5,
-                    dashLength: 8,
-                    gapLength: 6,
                   ),
                 ),
               );
@@ -111,7 +98,6 @@ class LogoSection extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(
                       color: AppColors.primary.withValues(alpha: 0.08),
-                      width: 1,
                     ),
                   ),
                 ),
@@ -144,7 +130,6 @@ class LogoSection extends StatelessWidget {
                             alpha: 0.1 + (glowAnimation.value * 0.1),
                           ),
                           blurRadius: 50,
-                          spreadRadius: 0,
                         ),
                         BoxShadow(
                           color: shadowColor,
@@ -155,7 +140,7 @@ class LogoSection extends StatelessWidget {
                     ),
                     child: ClipOval(
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
+                        filter: ImageFilter.blur(sigmaY: 0),
                         child: FillingLogo(
                           fillController: fillController,
                           fillAnimation: fillController,

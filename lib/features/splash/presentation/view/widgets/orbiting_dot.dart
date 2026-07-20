@@ -6,11 +6,6 @@ import '../../../../../core/constants/color_manager.dart';
 
 /// Orbiting dot widget for logo decoration
 class OrbitingDot extends StatelessWidget {
-  final Animation<double> animation;
-  final int index;
-  final double radius;
-  final double dotSize;
-  final Color? color;
 
   const OrbitingDot({
     super.key,
@@ -20,6 +15,11 @@ class OrbitingDot extends StatelessWidget {
     this.dotSize = 6.0,
     this.color,
   });
+  final Animation<double> animation;
+  final int index;
+  final double radius;
+  final double dotSize;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

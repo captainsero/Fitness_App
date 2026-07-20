@@ -5,9 +5,7 @@ import '../../../../../generated/l10n.dart';
 
 class VersionInfo extends StatelessWidget {
   const VersionInfo({
-    super.key,
-    required this.textController,
-    required this.textOpacity,
+    required this.textController, required this.textOpacity, super.key,
   });
   final AnimationController textController;
   final Animation<double> textOpacity;

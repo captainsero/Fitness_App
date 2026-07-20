@@ -5,9 +5,7 @@ import 'mesh_gradient_painter.dart';
 
 class MeshGradient extends StatelessWidget {
   const MeshGradient({
-    super.key,
-    required this.size,
-    required this.plusController,
+    required this.size, required this.plusController, super.key,
   });
   final Size size;
   final AnimationController plusController;

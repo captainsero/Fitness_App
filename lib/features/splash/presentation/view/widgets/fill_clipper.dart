@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 /// Custom clipper for fill effect (bottom to top)
 class FillClipper extends CustomClipper<Rect> {
-  final double fillProgress;
 
   FillClipper({required this.fillProgress});
+  final double fillProgress;
 
   @override
   Rect getClip(Size size) {

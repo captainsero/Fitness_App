@@ -5,7 +5,7 @@ import '../../../../../core/constants/values_manager.dart';
 import '../../../../../generated/l10n.dart';
 
 class Slogan extends StatelessWidget {
-  const Slogan({super.key, required this.textOpacity, required this.textSlide});
+  const Slogan({required this.textOpacity, required this.textSlide, super.key});
   final Animation<double> textOpacity;
   final Animation<Offset> textSlide;
 
@@ -34,7 +34,7 @@ class Slogan extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(RadiusSize.r30),
             color: sloganBackground,
-            border: Border.all(color: sloganBorder, width: 1),
+            border: Border.all(color: sloganBorder),
           ),
           child: Text(
             S.of(context).your_fitness_journey_starts_here,

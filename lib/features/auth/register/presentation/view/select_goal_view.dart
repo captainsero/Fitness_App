@@ -78,7 +78,7 @@ class _SelectGoalViewState extends State<SelectGoalView> {
             child: Image.asset(
               AssetsConst.loginBackground,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) =>
+              errorBuilder: (_, _, _) =>
               const ColoredBox(color: AppColors.backgroundDark),
             ),
           ),
@@ -116,7 +116,7 @@ class _SelectGoalViewState extends State<SelectGoalView> {
                                 child: Image.asset(
                                   AssetsConst.logo,
                                   height: AppSize.s48,
-                                  errorBuilder: (_, __, ___) =>
+                                  errorBuilder: (_, _, _) =>
                                   const SizedBox(height: AppSize.s48),
                                 ),
                               ),

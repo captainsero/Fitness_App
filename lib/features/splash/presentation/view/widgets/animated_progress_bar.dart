@@ -5,10 +5,6 @@ import '../../../../../core/constants/values_manager.dart';
 
 /// Animated progress bar loader
 class AnimatedProgressBar extends StatelessWidget {
-  final Animation<double> animation;
-  final double width;
-  final double height;
-  final Color? color;
 
   const AnimatedProgressBar({
     super.key,
@@ -17,6 +13,10 @@ class AnimatedProgressBar extends StatelessWidget {
     this.height = 3,
     this.color,
   });
+  final Animation<double> animation;
+  final double width;
+  final double height;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {

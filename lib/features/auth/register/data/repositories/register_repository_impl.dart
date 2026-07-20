@@ -2,9 +2,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../config/base_response/base_response.dart';
 import '../../../../../config/services/secure_storage/secure_storage_service.dart';
-import '../../../../../core/constants/app_keys/secure_storage_keys.dart';
-import '../../api/register_api.dart';
 import '../../../login/domain/entities/user_entity.dart';
+import '../../api/register_api.dart';
 import '../../domain/repositories/register_repository.dart';
 
 @Injectable(as: RegisterRepository)

@@ -54,17 +54,17 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       vsync: this,
     );
 
-    _logoScale = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _logoScale = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _logoController,
-        curve: const Interval(0.0, 0.7, curve: Curves.elasticOut),
+        curve: const Interval(0, 0.7, curve: Curves.elasticOut),
       ),
     );
 
-    _logoOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _logoOpacity = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _logoController,
-        curve: const Interval(0.0, 0.3, curve: Curves.easeOut),
+        curve: const Interval(0, 0.3, curve: Curves.easeOut),
       ),
     );
 
@@ -104,7 +104,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       vsync: this,
     )..repeat(reverse: true);
 
-    _glowAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
+    _glowAnimation = Tween<double>(begin: 0.5, end: 1).animate(
       CurvedAnimation(parent: _glowController, curve: Curves.easeInOut),
     );
 
@@ -120,10 +120,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       vsync: this,
     );
 
-    _titleOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _titleOpacity = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _textController,
-        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+        curve: const Interval(0, 0.6, curve: Curves.easeOut),
       ),
     );
 
@@ -131,14 +131,14 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         .animate(
           CurvedAnimation(
             parent: _textController,
-            curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic),
+            curve: const Interval(0, 0.6, curve: Curves.easeOutCubic),
           ),
         );
 
-    _textOpacity = Tween<double>(begin: 0.0, end: 1.0).animate(
+    _textOpacity = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _textController,
-        curve: const Interval(0.4, 1.0, curve: Curves.easeOut),
+        curve: const Interval(0.4, 1, curve: Curves.easeOut),
       ),
     );
 
@@ -146,7 +146,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         .animate(
           CurvedAnimation(
             parent: _textController,
-            curve: const Interval(0.4, 1.0, curve: Curves.easeOutCubic),
+            curve: const Interval(0.4, 1, curve: Curves.easeOutCubic),
           ),
         );
 
@@ -161,7 +161,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     });
   }
 
-  void _navigateToNextScreen() async {
+  Future<void> _navigateToNextScreen() async {
     await Future.delayed(const Duration(seconds: 4));
     if (mounted) {
       context.go(RoutePath.onBoardingRoute);

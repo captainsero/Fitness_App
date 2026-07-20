@@ -4,9 +4,7 @@ import '../../../../../core/constants/color_manager.dart';
 
 class TopRightDecorativeCircle extends StatelessWidget {
   const TopRightDecorativeCircle({
-    super.key,
-    required this.pulseController,
-    required this.size,
+    required this.pulseController, required this.size, super.key,
   });
   final Animation<double> pulseController;
   final Size size;
@@ -54,9 +52,7 @@ class TopRightDecorativeCircle extends StatelessWidget {
 
 class BottomLeftDecorativeCircle extends StatelessWidget {
   const BottomLeftDecorativeCircle({
-    super.key,
-    required this.pulseController,
-    required this.size,
+    required this.pulseController, required this.size, super.key,
   });
   final Animation<double> pulseController;
   final Size size;
