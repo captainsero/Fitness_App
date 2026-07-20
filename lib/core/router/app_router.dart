@@ -12,6 +12,7 @@ import '../../features/auth/register/presentation/view/select_weight_view.dart';
 import '../../features/error/presentation/view/error_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
 import '../../features/on_boarding/presentation/views/screen/on_boarding_screen.dart';
+import '../../features/main/main_view.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 import '../../features/smart_coach/presentation/view/smart_coach_view.dart';
 import '../../features/splash/presentation/view/pages/splash_page.dart';
