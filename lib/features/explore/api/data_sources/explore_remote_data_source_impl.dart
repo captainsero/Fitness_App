@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../config/base_response/base_response.dart';
 import '../../data/data_sources/explore_remote_data_source_contract.dart';
+import '../../data/models/meals_category_model.dart';
 import '../../data/models/muscle_model.dart';
 import '../../data/models/muscles_group_model.dart';
 import '../api_client/explore_api_client.dart';
@@ -49,6 +50,18 @@ class ExploreRemoteDataSourceImpl implements ExploreRemoteDataSourceContract {
       );
     } catch (e) {
       return ErrorBaseResponse<List<MuscleModel>>(error: e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<List<MealsCategoryModel>>> getMealsCategories() async {
+    try {
+      final response = await _apiClient.getMealsCategories();
+      return SuccessBaseResponse<List<MealsCategoryModel>>(
+        data: response.categories ?? [],
+      );
+    } catch (e) {
+      return ErrorBaseResponse<List<MealsCategoryModel>>(error: e);
     }
   }
 }

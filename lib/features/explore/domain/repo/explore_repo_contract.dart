@@ -1,6 +1,7 @@
 import '../../../../config/base_response/base_response.dart';
 import '../../data/models/muscle_model.dart';
 import '../../data/models/muscles_group_model.dart';
+import '../entities/meals_category_entity.dart';
 
 abstract class ExploreRepoContract {
   Future<BaseResponse<List<MuscleModel>>> getRandomMuscles();
@@ -8,4 +9,5 @@ abstract class ExploreRepoContract {
   Future<BaseResponse<List<MuscleModel>>> getMusclesByMusclesGroup({
     required String groupId,
   });
+  Future<BaseResponse<List<MealsCategoryEntity>>> getMealsCategories();
 }
