@@ -8,4 +8,5 @@ abstract class ApiEndpoints {
   static const String forgotPassword = '$baseUrl/auth/forgotPassword';
   static const String verifyResetCode = '$baseUrl/auth/verifyResetCode';
   static const String resetPassword = '$baseUrl/auth/resetPassword';
+  static const String getMealDetails = '$baseUrl/1/lookup.php';
 }

@@ -11,6 +11,7 @@ import '../../features/auth/register/presentation/view/select_height_view.dart';
 import '../../features/auth/register/presentation/view/select_weight_view.dart';
 import '../../features/error/presentation/view/error_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
+import '../../features/food_details/presentation/view/food_details_view.dart';
 import '../../features/on_boarding/presentation/views/screen/on_boarding_screen.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 import '../../features/smart_coach/presentation/view/smart_coach_view.dart';
@@ -20,7 +21,10 @@ import 'route_path.dart';
 
 abstract class AppRouter {
   static final GoRouter goRouter = GoRouter(
-    initialLocation: RoutePath.splashRoute,
+    // initialLocation: RoutePath.splashRoute,
+    //! =======================================
+    initialLocation: '${RoutePath.foodDetailsRoute}/52959',
+    //! =======================================
     routes: [
       GoRoute(
         path: RoutePath.splashRoute,
@@ -88,6 +92,12 @@ abstract class AppRouter {
         path: RoutePath.selectActivityLevelRoute,
         builder: (context, state) => SelectActivityLevelView(
           formData: state.extra as RegisterFormData?,
+        ),
+      ),
+      GoRoute(
+        path: '${RoutePath.foodDetailsRoute}/:mealId',
+        builder: (context, state) => FoodDetailsView(
+          mealId: state.pathParameters['mealId'] ?? '53440',
         ),
       ),
     ],
