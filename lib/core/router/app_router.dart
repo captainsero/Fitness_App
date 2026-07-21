@@ -1,15 +1,35 @@
 import 'package:go_router/go_router.dart';
+
+import '../../features/auth/login/presentation/view/login_view.dart';
+import '../../features/auth/register/presentation/models/register_form_data.dart';
+import '../../features/auth/register/presentation/view/register_view.dart';
+import '../../features/auth/register/presentation/view/select_activity_level_view.dart';
+import '../../features/auth/register/presentation/view/select_age_view.dart';
+import '../../features/auth/register/presentation/view/select_gender_view.dart';
+import '../../features/auth/register/presentation/view/select_goal_view.dart';
+import '../../features/auth/register/presentation/view/select_height_view.dart';
+import '../../features/auth/register/presentation/view/select_weight_view.dart';
 import '../../features/error/presentation/view/error_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
+import '../../features/on_boarding/presentation/views/screen/on_boarding_screen.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 import '../../features/smart_coach/presentation/view/smart_coach_view.dart';
+import '../../features/splash/presentation/view/pages/splash_page.dart';
 import '../../features/workouts/presentation/view/workouts_view.dart';
 import 'route_path.dart';
 
 abstract class AppRouter {
   static final GoRouter goRouter = GoRouter(
-    initialLocation: RoutePath.exploreRoute,
+    initialLocation: RoutePath.splashRoute,
     routes: [
+      GoRoute(
+        path: RoutePath.splashRoute,
+        builder: (context, state) => const SplashPage(),
+      ),
+      GoRoute(
+        path: RoutePath.onBoardingRoute,
+        builder: (context, state) => const OnBoardingScreen(),
+      ),
       GoRoute(
         path: RoutePath.exploreRoute,
         builder: (context, state) => const ExploreView(),
@@ -25,6 +45,50 @@ abstract class AppRouter {
       GoRoute(
         path: RoutePath.profileRoute,
         builder: (context, state) => const ProfileView(),
+      ),
+      GoRoute(
+        path: RoutePath.loginRoute,
+        builder: (context, state) => const LoginView(),
+      ),
+      GoRoute(
+        path: RoutePath.registerRoute,
+        builder: (context, state) => const RegisterView(),
+      ),
+      GoRoute(
+        path: RoutePath.selectGenderRoute,
+        builder: (context, state) => SelectGenderView(
+          formData: state.extra as RegisterFormData?,
+        ),
+      ),
+      GoRoute(
+        path: RoutePath.selectAgeRoute,
+        builder: (context, state) => SelectAgeView(
+          formData: state.extra as RegisterFormData?,
+        ),
+      ),
+      GoRoute(
+        path: RoutePath.selectWeightRoute,
+        builder: (context, state) => SelectWeightView(
+          formData: state.extra as RegisterFormData?,
+        ),
+      ),
+      GoRoute(
+        path: RoutePath.selectHeightRoute,
+        builder: (context, state) => SelectHeightView(
+          formData: state.extra as RegisterFormData?,
+        ),
+      ),
+      GoRoute(
+        path: RoutePath.selectGoalRoute,
+        builder: (context, state) => SelectGoalView(
+          formData: state.extra as RegisterFormData?,
+        ),
+      ),
+      GoRoute(
+        path: RoutePath.selectActivityLevelRoute,
+        builder: (context, state) => SelectActivityLevelView(
+          formData: state.extra as RegisterFormData?,
+        ),
       ),
     ],
     errorBuilder: (context, state) {

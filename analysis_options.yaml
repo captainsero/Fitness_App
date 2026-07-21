@@ -22,6 +22,7 @@ analyzer:
     missing_required_param: error
     missing_return: error
     invalid_annotation_target: ignore # Often required for code generators like Freezed
+    avoid_catches_without_on_clauses: ignore
 
 linter:
   rules:
