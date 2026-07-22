@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/constants/values_manager.dart';
+import '../../../../generated/l10n.dart';
 import '../view_model/explore_cubit.dart';
 import '../view_model/explore_state.dart';
 import 'explore_containers_headline.dart';
@@ -20,7 +21,7 @@ class RecommendationForYouContainer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const ExploreContainersHeadline(title: 'Recommendation For You'),
+            ExploreContainersHeadline(title: S.current.recommendationForYou),
 
             TextButton(
               onPressed: () {},
@@ -30,7 +31,7 @@ class RecommendationForYouContainer extends StatelessWidget {
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               child: Text(
-                'See All',
+                S.current.seeAll,
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   decoration: TextDecoration.underline,
@@ -81,7 +82,9 @@ class RecommendationForYouContainer extends StatelessWidget {
                       ),
                       child: RecommendationWidget(
                         image: isLoading ? '' : categories![index].image,
-                        name: isLoading ? 'Loading' : categories![index].name,
+                        name: isLoading
+                            ? S.current.loading
+                            : categories![index].name,
                       ),
                     );
                   },

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../../../core/constants/font_manager.dart';
 import '../../../../core/constants/values_manager.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entities/exercise_by_muscles_difficulty_entity.dart';
 
 class PopularTrainingWidget extends StatelessWidget {
@@ -55,7 +56,7 @@ class PopularTrainingWidget extends StatelessWidget {
                   ),
                   alignment: Alignment.bottomCenter,
                   child: Text(
-                    '${entity.tasksNumber} Tasks',
+                    '${entity.tasksNumber} ${S.current.tasks}',
                     style:
                         Theme.of(
                           context,

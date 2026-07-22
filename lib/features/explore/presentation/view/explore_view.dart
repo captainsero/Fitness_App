@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/values_manager.dart';
 import '../../../../core/shared_widgets/blurred_background.dart';
+import '../../../../generated/l10n.dart';
 import '../widgets/categories_container.dart';
 import '../widgets/popular_training_container.dart';
 import '../widgets/recommendation_for_you_container.dart';
@@ -18,11 +19,12 @@ class ExploreView extends StatelessWidget {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //TODO: add name and image when getting profile data
             Text(
               'Hi Ahmed',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
-            const Text("let's start your day"),
+            Text(S.current.letsStartYourDay),
           ],
         ),
         actions: const [

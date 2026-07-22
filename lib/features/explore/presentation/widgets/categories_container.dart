@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/constants/values_manager.dart';
+import '../../../../generated/l10n.dart';
 import 'categories_divider.dart';
 import 'category_widget.dart';
 import 'explore_containers_headline.dart';
@@ -15,7 +16,7 @@ class CategoriesContainer extends StatelessWidget {
       spacing: AppSize.s10,
       crossAxisAlignment: .start,
       children: [
-        const ExploreContainersHeadline(title: 'Category'),
+        ExploreContainersHeadline(title: S.current.category),
 
         Container(
           width: .infinity,
@@ -25,40 +26,40 @@ class CategoriesContainer extends StatelessWidget {
             ).colorScheme.surface.withAlpha(150),
             borderRadius: BorderRadius.circular(RadiusSize.r20),
           ),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: .spaceBetween,
             children: [
               CategoryWidget(
-                image: 'assets/images/O15_34.png',
-                title: 'Gym',
+                image: AssetsConst.gymImage,
+                title: S.current.gym,
               ),
 
-              CategoriesDivider(),
+              const CategoriesDivider(),
 
               CategoryWidget(
-                image: 'assets/images/O15_19.png',
-                title: 'Fitness',
+                image: AssetsConst.fitnessImage,
+                title: S.current.fitness,
               ),
 
-              CategoriesDivider(),
+              const CategoriesDivider(),
 
               CategoryWidget(
-                image: 'assets/images/O15_25.png',
-                title: 'Yoga',
+                image: AssetsConst.yogaImage,
+                title: S.current.yoga,
               ),
 
-              CategoriesDivider(),
+              const CategoriesDivider(),
 
               CategoryWidget(
-                image: 'assets/images/O15_24.png',
-                title: 'Aerobics',
+                image: AssetsConst.aerobicsImage,
+                title: S.current.aerobics,
               ),
 
-              CategoriesDivider(),
+              const CategoriesDivider(),
 
               CategoryWidget(
-                image: 'assets/images/O15_9.png',
-                title: 'Trainer',
+                image: AssetsConst.trainerImage,
+                title: S.current.trainer,
               ),
             ],
           ),

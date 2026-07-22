@@ -6,6 +6,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/constants/font_manager.dart';
 import '../../../../core/constants/values_manager.dart';
+import '../../../../generated/l10n.dart';
 import '../view_model/explore_cubit.dart';
 import '../view_model/explore_event.dart';
 import '../view_model/explore_state.dart';
@@ -24,8 +25,8 @@ class UpcomingWorkoutsContainer extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const ExploreContainersHeadline(
-              title: 'Upcoming Workouts',
+            ExploreContainersHeadline(
+              title: S.current.upcomingWorkouts,
             ),
             TextButton(
               onPressed: () {},
@@ -35,7 +36,7 @@ class UpcomingWorkoutsContainer extends StatelessWidget {
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               child: Text(
-                'See All',
+                S.current.seeAll,
                 style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   decoration: TextDecoration.underline,
@@ -109,7 +110,9 @@ class UpcomingWorkoutsContainer extends StatelessWidget {
                         ),
                         child: Center(
                           child: Text(
-                            isLoading ? 'Loading' : muscles![index].name ?? '',
+                            isLoading
+                                ? S.current.loading
+                                : muscles![index].name ?? '',
                             style: Theme.of(context).textTheme.displayLarge!
                                 .copyWith(
                                   fontSize: FontSize.s12,
@@ -165,7 +168,7 @@ class UpcomingWorkoutsContainer extends StatelessWidget {
                       child: UpcomingWorkoutsWidget(
                         image: isLoading ? '' : muscles![index].image ?? '',
                         titel: isLoading
-                            ? 'Loading'
+                            ? S.current.loading
                             : muscles![index].name ?? '',
                       ),
                     );

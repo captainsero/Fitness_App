@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/constants/values_manager.dart';
+import '../../../../generated/l10n.dart';
 import '../view_model/explore_cubit.dart';
 import '../view_model/explore_state.dart';
 import 'explore_containers_headline.dart';
@@ -17,7 +18,7 @@ class RecommendationToDayContainer extends StatelessWidget {
       spacing: AppSize.s10,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ExploreContainersHeadline(title: 'Recommendation To Day'),
+        ExploreContainersHeadline(title: S.current.recommendationToDay),
 
         BlocBuilder<ExploreCubit, ExploreState>(
           buildWhen: (previous, current) =>
@@ -57,7 +58,7 @@ class RecommendationToDayContainer extends StatelessWidget {
                       child: RecommendationWidget(
                         image: isLoading ? '' : muscles![index].image ?? '',
                         name: isLoading
-                            ? 'Loading'
+                            ? S.current.loading
                             : muscles![index].name ?? '',
                       ),
                     );

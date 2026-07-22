@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/constants/values_manager.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entities/exercise_by_muscles_difficulty_entity.dart';
 import '../view_model/explore_cubit.dart';
 import '../view_model/explore_state.dart';
@@ -18,7 +19,7 @@ class PopularTrainingContainer extends StatelessWidget {
       spacing: AppSize.s10,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const ExploreContainersHeadline(title: 'Popular Training'),
+        ExploreContainersHeadline(title: S.current.popularTraining),
 
         BlocBuilder<ExploreCubit, ExploreState>(
           buildWhen: (previous, current) =>
@@ -62,8 +63,8 @@ class PopularTrainingContainer extends StatelessWidget {
                                 primeMoverMuscleId: '',
                                 difficultylevelId: '',
                                 image: '',
-                                name: 'Loading',
-                                difficulty: 'Loading',
+                                name: S.current.loading,
+                                difficulty: S.current.loading,
                                 tasksNumber: 0,
                               )
                             : exercises![index],
