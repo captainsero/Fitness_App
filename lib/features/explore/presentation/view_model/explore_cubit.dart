@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../config/base_state/base_state.dart';
 import '../../../../config/handler/response_to_state_mapper.dart';
+import '../../domain/use_cases/get_exercise_by_muscle_difficulty_use_case.dart';
 import '../../domain/use_cases/get_meals_categories_use_case.dart';
 import '../../domain/use_cases/get_muscles_by_muscles_group_use_case.dart';
 import '../../domain/use_cases/get_muscles_group_use_case.dart';
@@ -17,16 +20,29 @@ class ExploreCubit extends Cubit<ExploreState> {
     required GetMusclesByMusclesGroupUseCase getMusclesByMusclesGroupUseCase,
     required GetMusclesGroupUseCase getMusclesGroupUseCase,
     required GetRandomMusclesUseCase getRandomMusclesUseCase,
+    required GetExerciseByMuscleDifficultyUseCase
+        getExerciseByMuscleDifficultyUseCase,
   }) : _getMealsCategoriesUseCase = getMealsCategoriesUseCase,
        _getMusclesByMusclesGroupUseCase = getMusclesByMusclesGroupUseCase,
        _getMusclesGroupUseCase = getMusclesGroupUseCase,
        _getRandomMusclesUseCase = getRandomMusclesUseCase,
+       _getExerciseByMuscleDifficultyUseCase =
+           getExerciseByMuscleDifficultyUseCase,
        super(const ExploreState());
 
   final GetMealsCategoriesUseCase _getMealsCategoriesUseCase;
   final GetMusclesByMusclesGroupUseCase _getMusclesByMusclesGroupUseCase;
   final GetMusclesGroupUseCase _getMusclesGroupUseCase;
   final GetRandomMusclesUseCase _getRandomMusclesUseCase;
+  final GetExerciseByMuscleDifficultyUseCase
+      _getExerciseByMuscleDifficultyUseCase;
+
+  Future<void> init() async {
+    unawaited(onEvent(GetRandomMusclesEvent()));
+    unawaited(onEvent(GetMealsCategoriesEvent()));
+    unawaited(onEvent(GetExerciseByMuscleDifficultyEvent()));
+    await onEvent(GetMusclesGroupEvent());
+  }
 
   Future<void> onEvent(ExploreEvent event) async {
     if (event is GetMealsCategoriesEvent) {
@@ -37,6 +53,10 @@ class ExploreCubit extends Cubit<ExploreState> {
       await _getMusclesGroup();
     } else if (event is GetRandomMusclesEvent) {
       await _getRandomMuscles();
+    } else if (event is GetExerciseByMuscleDifficultyEvent) {
+      await _getExerciseByMuscleDifficulty();
+    } else if (event is SelectMusclesGroupEvent) {
+      await _selectMusclesGroup(event.index);
     }
   }
 
@@ -60,6 +80,15 @@ class ExploreCubit extends Cubit<ExploreState> {
     final handler = ResponseToStateMapper.handle(response);
 
     emit(state.copyWith(getMusclesGroupState: handler));
+
+    // After fetching muscles groups, automatically fetch
+    // muscles for the first group
+    if (handler.data != null && handler.data!.isNotEmpty) {
+      final firstGroupId = handler.data!.first.id;
+      if (firstGroupId != null) {
+        await _getMusclesByMusclesGroup(firstGroupId);
+      }
+    }
   }
 
   Future<void> _getMusclesByMusclesGroup(String groupId) async {
@@ -75,6 +104,18 @@ class ExploreCubit extends Cubit<ExploreState> {
     emit(state.copyWith(getMusclesByMusclesGroupState: handler));
   }
 
+  Future<void> _selectMusclesGroup(int index) async {
+    emit(state.copyWith(selectedMusclesGroupIndex: index));
+
+    final musclesGroups = state.getMusclesGroupState.data;
+    if (musclesGroups != null && index < musclesGroups.length) {
+      final groupId = musclesGroups[index].id;
+      if (groupId != null) {
+        await _getMusclesByMusclesGroup(groupId);
+      }
+    }
+  }
+
   Future<void> _getRandomMuscles() async {
     emit(
       state.copyWith(getRandomMusclesState: const BaseState(isLoading: true)),
@@ -85,4 +126,18 @@ class ExploreCubit extends Cubit<ExploreState> {
 
     emit(state.copyWith(getRandomMusclesState: handler));
   }
+
+  Future<void> _getExerciseByMuscleDifficulty() async {
+    emit(
+      state.copyWith(
+        getExerciseByMuscleDifficultyState: const BaseState(isLoading: true),
+      ),
+    );
+
+    final response = await _getExerciseByMuscleDifficultyUseCase();
+    final handler = ResponseToStateMapper.handle(response);
+
+    emit(state.copyWith(getExerciseByMuscleDifficultyState: handler));
+  }
 }
+

@@ -2,6 +2,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../config/base_response/base_response.dart';
 import '../../data/data_sources/explore_remote_data_source_contract.dart';
+import '../../data/models/exercise_model.dart';
+import '../../data/models/level_model.dart';
 import '../../data/models/meals_category_model.dart';
 import '../../data/models/muscle_model.dart';
 import '../../data/models/muscles_group_model.dart';
@@ -62,6 +64,34 @@ class ExploreRemoteDataSourceImpl implements ExploreRemoteDataSourceContract {
       );
     } catch (e) {
       return ErrorBaseResponse<List<MealsCategoryModel>>(error: e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<List<LevelModel>>> getAllLevels() async {
+    try {
+      final response = await _apiClient.getAllLevels();
+      return SuccessBaseResponse<List<LevelModel>>(data: response.levels ?? []);
+    } catch (e) {
+      return ErrorBaseResponse<List<LevelModel>>(error: e);
+    }
+  }
+
+  @override
+  Future<BaseResponse<List<ExerciseModel>>> getExerciseByMuscleDifficulty({
+    required String primeMoverMuscleId,
+    required String difficultylevelId,
+  }) async {
+    try {
+      final response = await _apiClient.getExerciseByMuscleDifficulty(
+        primeMoverMuscleId: primeMoverMuscleId,
+        difficultylevelId: difficultylevelId,
+      );
+      return SuccessBaseResponse<List<ExerciseModel>>(
+        data: response.exercises ?? [],
+      );
+    } catch (e) {
+      return ErrorBaseResponse<List<ExerciseModel>>(error: e);
     }
   }
 }
