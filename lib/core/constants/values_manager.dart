@@ -53,6 +53,7 @@ abstract class AppSize {
   static const double s100 = 100;
   static const double s130 = 130;
   static const double s150 = 150;
+  static const double s170 = 170;
   static const double s200 = 200;
 }
 
@@ -91,4 +92,11 @@ abstract class AssetsConst {
   static const String appleIcon = 'assets/images/Apple.png';
   static const String facebookIcon = 'assets/images/facebook circle.png';
   static const String loginBackground = 'assets/images/Login.png';
+
+  //Explore
+  static const String gymImage = 'assets/images/O15_34.png';
+  static const String fitnessImage = 'assets/images/O15_19.png';
+  static const String yogaImage = 'assets/images/O15_25.png';
+  static const String aerobicsImage = 'assets/images/O15_24.png';
+  static const String trainerImage = 'assets/images/O15_9.png';
 }
