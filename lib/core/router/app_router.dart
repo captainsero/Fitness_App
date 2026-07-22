@@ -25,7 +25,7 @@ import 'route_path.dart';
 
 abstract class AppRouter {
   static final GoRouter goRouter = GoRouter(
-    initialLocation: RoutePath.exploreRoute,
+    initialLocation: RoutePath.splashRoute,
     routes: [
       GoRoute(
         path: RoutePath.splashRoute,
