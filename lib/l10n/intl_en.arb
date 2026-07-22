@@ -65,7 +65,7 @@
     "getFitter": "Get Fitter",
     "gainMoreFlexible": "Gain More Flexibility",
     "learnTheBasics": "Learn the Basics",
-    "confirmPasswordHint" : "conifrm password",
+    "confirmPasswordHint": "conifrm password",
     "whatIsYourWeight": "What is your weight?",
     "kg": "kg",
     "whatIsYourActivityLevel": "What is your activity level?",
@@ -73,5 +73,18 @@
     "lightlyActive": "Lightly Active",
     "moderatelyActive": "Moderately Active",
     "veryActive": "Very Active",
-    "extraActive": "Extra Active"
+    "extraActive": "Extra Active",
+    "category": "Category",
+    "gym": "Gym",
+    "fitness": "Fitness",
+    "yoga": "Yoga",
+    "aerobics": "Aerobics",
+    "trainer": "Trainer",
+    "popularTraining": "Popular Training",
+    "tasks": "Tasks",
+    "recommendationForYou": "Recommendation For You",
+    "seeAll": "See All",
+    "recommendationToDay": "Recommendation To Day",
+    "upcomingWorkouts": "Upcoming Workouts",
+    "letsStartYourDay" : "let's start your day"
 }

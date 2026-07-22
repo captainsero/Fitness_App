@@ -23,6 +23,9 @@ ThemeData darkTheme = ThemeData(
 
     surface: AppColors.neutral900,
     onSurface: AppColors.white,
+
+    tertiary: AppColors.white,
+    onTertiary: AppColors.neutral900,
   ),
 
   textTheme: TextTheme(
@@ -102,13 +105,13 @@ ThemeData darkTheme = ThemeData(
   ),
 
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.backgroundDark,
+    backgroundColor: AppColors.transparent,
     foregroundColor: AppColors.white,
     surfaceTintColor: Colors.transparent,
     elevation: 0,
     leadingWidth: AppSize.s25,
-    actionsPadding: const EdgeInsets.only(right: AppPadding.p20),
-    titleSpacing: AppSize.s0,
+    actionsPadding: const EdgeInsets.only(right: AppPadding.p16),
+    titleSpacing: AppSize.s16,
     titleTextStyle: getRegularStyle(
       fontFamily: FontConstants.balooThambi2,
       color: AppColors.white,
