@@ -42,8 +42,8 @@ class MealVideoPlayerState extends State<MealVideoPlayer> {
   }
 
   @override
-  void dispose() {
-    _controller.close();
+  Future<void> dispose() async {
+    await _controller.close();
     super.dispose();
   }
 

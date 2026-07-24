@@ -17,7 +17,7 @@ class FoodDetailsRemoteDataSourceImpl
       final response = await apiClient.getMealDetails(id);
       return SuccessBaseResponse<MealsResponseModel>(data: response);
     } catch (e) {
-      return ErrorBaseResponse<MealsResponseModel>(error: e.toString());
+      return ErrorBaseResponse<MealsResponseModel>(error: e);
     }
   }
 }

@@ -15,8 +15,12 @@ class FoodDetailsRepoImpl implements FoodDetailsRepoContract {
     final response = await remoteDataSource.getMealDetails(id);
     switch (response) {
       case SuccessBaseResponse():
-        final meal = response.data.meals?.first.mapToEntity();
-        return SuccessBaseResponse<MealEntity>(data: meal!);
+        final meals = response.data.meals;
+        if (meals != null && meals.isNotEmpty) {
+          final meal = meals.first.mapToEntity();
+          return SuccessBaseResponse<MealEntity>(data: meal);
+        }
+        return const ErrorBaseResponse<MealEntity>(errorMessage: 'No meal found');
 
       default:
         return ErrorBaseResponse<MealEntity>(
