@@ -1,4 +1,4 @@
-.import 'muscle_group_model.dart';
+import 'muscle_group_model.dart';
 
 /// Response shape of `GET /muscles` (confirmed via live network logs --
 /// despite the name, this bare endpoint returns muscle GROUPS, not
