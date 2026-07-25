@@ -87,12 +87,15 @@ abstract class AssetsConst {
   static const String onBoardingImage2 = 'assets/images/onboardingimage2.png';
   static const String onBoardingImage3 = 'assets/images/onboardingimage3.png';
 
-  //login
+  //!  login
   static const String googleIcon = 'assets/images/Google.png';
   static const String appleIcon = 'assets/images/Apple.png';
   static const String facebookIcon = 'assets/images/facebook circle.png';
   static const String loginBackground = 'assets/images/Login.png';
 
+  //!  Food Details Images
+  static const String foodDetailsBackground =
+      'assets/images/foodDetailsBackground.png';
   //Explore
   static const String gymImage = 'assets/images/O15_34.png';
   static const String fitnessImage = 'assets/images/O15_19.png';

@@ -88,13 +88,13 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
     setState(() => _selectedActivityLevel = activityLevel);
   }
 
-  void _onNextPressed() {
+  Future<void> _onNextPressed() async {
     final data = widget.formData;
     final activityLevel = _selectedActivityLevel;
 
     if (!_canContinue || data == null || activityLevel == null) return;
 
-    context.read<RegisterCubit>().register(
+    await context.read<RegisterCubit>().register(
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -138,7 +138,7 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                 AssetsConst.loginBackground,
                 fit: BoxFit.cover,
                 errorBuilder: (_, _, _) =>
-                const ColoredBox(color: AppColors.backgroundDark),
+                    const ColoredBox(color: AppColors.backgroundDark),
               ),
             ),
             DecoratedBox(
@@ -176,7 +176,7 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                                     AssetsConst.logo,
                                     height: AppSize.s48,
                                     errorBuilder: (_, _, _) =>
-                                    const SizedBox(height: AppSize.s48),
+                                        const SizedBox(height: AppSize.s48),
                                   ),
                                 ),
                               ),
@@ -239,7 +239,8 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                             children: [
                               _ActivityLevelOption(
                                 label: s.sedentary,
-                                isSelected: _selectedActivityLevel ==
+                                isSelected:
+                                    _selectedActivityLevel ==
                                     ActivityLevel.sedentary,
                                 onTap: () => _onActivityLevelTap(
                                   ActivityLevel.sedentary,
@@ -248,7 +249,8 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                               const SizedBox(height: AppSize.s12),
                               _ActivityLevelOption(
                                 label: s.lightlyActive,
-                                isSelected: _selectedActivityLevel ==
+                                isSelected:
+                                    _selectedActivityLevel ==
                                     ActivityLevel.lightlyActive,
                                 onTap: () => _onActivityLevelTap(
                                   ActivityLevel.lightlyActive,
@@ -257,7 +259,8 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                               const SizedBox(height: AppSize.s12),
                               _ActivityLevelOption(
                                 label: s.moderatelyActive,
-                                isSelected: _selectedActivityLevel ==
+                                isSelected:
+                                    _selectedActivityLevel ==
                                     ActivityLevel.moderatelyActive,
                                 onTap: () => _onActivityLevelTap(
                                   ActivityLevel.moderatelyActive,
@@ -266,7 +269,8 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                               const SizedBox(height: AppSize.s12),
                               _ActivityLevelOption(
                                 label: s.veryActive,
-                                isSelected: _selectedActivityLevel ==
+                                isSelected:
+                                    _selectedActivityLevel ==
                                     ActivityLevel.veryActive,
                                 onTap: () => _onActivityLevelTap(
                                   ActivityLevel.veryActive,
@@ -275,7 +279,8 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                               const SizedBox(height: AppSize.s12),
                               _ActivityLevelOption(
                                 label: s.extraActive,
-                                isSelected: _selectedActivityLevel ==
+                                isSelected:
+                                    _selectedActivityLevel ==
                                     ActivityLevel.extraActive,
                                 onTap: () => _onActivityLevelTap(
                                   ActivityLevel.extraActive,
@@ -290,14 +295,15 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                                   return SizedBox(
                                     width: double.infinity,
                                     child: ElevatedButton(
-                                      onPressed:
-                                      enabled ? _onNextPressed : null,
+                                      onPressed: enabled
+                                          ? _onNextPressed
+                                          : null,
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: enabled
                                             ? AppColors.primary
                                             : AppColors.neutral300,
                                         disabledBackgroundColor:
-                                        AppColors.neutral300,
+                                            AppColors.neutral300,
                                         padding: const EdgeInsets.symmetric(
                                           vertical: AppPadding.p12,
                                         ),
@@ -309,24 +315,24 @@ class _SelectActivityLevelViewState extends State<_SelectActivityLevelView> {
                                       ),
                                       child: isLoading
                                           ? const SizedBox(
-                                        height: AppSize.s18,
-                                        width: AppSize.s18,
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: AppSize.s2,
-                                          color: AppColors.white,
-                                        ),
-                                      )
+                                              height: AppSize.s18,
+                                              width: AppSize.s18,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: AppSize.s2,
+                                                color: AppColors.white,
+                                              ),
+                                            )
                                           : Text(
-                                        s.next,
-                                        style: const TextStyle(
-                                          color: AppColors.white,
-                                          fontFamily:
-                                          FontConstants.balooThambi2,
-                                          fontWeight:
-                                          FontWeightManager.bold,
-                                          fontSize: FontSize.s14,
-                                        ),
-                                      ),
+                                              s.next,
+                                              style: const TextStyle(
+                                                color: AppColors.white,
+                                                fontFamily:
+                                                    FontConstants.balooThambi2,
+                                                fontWeight:
+                                                    FontWeightManager.bold,
+                                                fontSize: FontSize.s14,
+                                              ),
+                                            ),
                                     ),
                                   );
                                 },
@@ -495,13 +501,13 @@ class _RadioCircle extends StatelessWidget {
       ),
       child: isSelected
           ? Container(
-        width: AppSize.s8,
-        height: AppSize.s8,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppColors.primary,
-        ),
-      )
+              width: AppSize.s8,
+              height: AppSize.s8,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.primary,
+              ),
+            )
           : null,
     );
   }

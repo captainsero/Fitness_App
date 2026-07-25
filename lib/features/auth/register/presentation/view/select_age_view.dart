@@ -60,7 +60,7 @@ class _SelectAgeViewState extends State<SelectAgeView> {
               AssetsConst.loginBackground,
               fit: BoxFit.cover,
               errorBuilder: (_, _, _) =>
-              const ColoredBox(color: AppColors.backgroundDark),
+                  const ColoredBox(color: AppColors.backgroundDark),
             ),
           ),
           DecoratedBox(
@@ -97,7 +97,7 @@ class _SelectAgeViewState extends State<SelectAgeView> {
                                 AssetsConst.logo,
                                 height: AppSize.s48,
                                 errorBuilder: (_, _, _) =>
-                                const SizedBox(height: AppSize.s48),
+                                    const SizedBox(height: AppSize.s48),
                               ),
                             ),
                           ),
@@ -139,7 +139,9 @@ class _SelectAgeViewState extends State<SelectAgeView> {
                 ),
                 const SizedBox(height: AppSize.s20),
                 ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(RadiusSize.r50)),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(RadiusSize.r50),
+                  ),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
@@ -152,7 +154,9 @@ class _SelectAgeViewState extends State<SelectAgeView> {
                       ),
                       decoration: BoxDecoration(
                         color: AppColors.neutral900.withAlpha(105),
-                        borderRadius: const BorderRadius.all(Radius.circular(RadiusSize.r50)),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(RadiusSize.r50),
+                        ),
                         border: Border.all(
                           color: AppColors.white.withAlpha(35),
                         ),
@@ -251,6 +255,7 @@ class _BackButton extends StatelessWidget {
     );
   }
 }
+
 class _StepProgressIndicator extends StatelessWidget {
   const _StepProgressIndicator({
     required this.step,
@@ -289,6 +294,7 @@ class _StepProgressIndicator extends StatelessWidget {
     );
   }
 }
+
 class _AgePicker extends StatefulWidget {
   const _AgePicker({
     required this.minAge,
@@ -356,8 +362,8 @@ class _AgePickerState extends State<_AgePicker> {
       child: AnimatedBuilder(
         animation: _controller,
         builder: (context, _) {
-          final page = _controller.hasClients &&
-              _controller.position.haveDimensions
+          final page =
+              _controller.hasClients && _controller.position.haveDimensions
               ? (_controller.page ?? _selectedIndex.toDouble())
               : _selectedIndex.toDouble();
 
@@ -379,9 +385,7 @@ class _AgePickerState extends State<_AgePicker> {
                     child: Text(
                       '${widget.minAge + index}',
                       style: TextStyle(
-                        color: isSelected
-                            ? AppColors.primary
-                            : AppColors.white,
+                        color: isSelected ? AppColors.primary : AppColors.white,
                         fontFamily: FontConstants.balooThambi2,
                         fontWeight: isSelected
                             ? FontWeightManager.bold

@@ -74,6 +74,14 @@
     "moderatelyActive": "Moderately Active",
     "veryActive": "Very Active",
     "extraActive": "Extra Active",
+    "noDataFound": "No data found",
+    "unknownMeal": "Unknown Meal",
+    "energy": "Energy",
+    "protein": "Protein",
+    "carbs": "Carbs",
+    "fat": "Fat",
+    "ingredients": "Ingredients",
+    "noVideoForThisRecipe": "No video for this recipe",
     "category": "Category",
     "gym": "Gym",
     "fitness": "Fitness",
@@ -86,5 +94,9 @@
     "seeAll": "See All",
     "recommendationToDay": "Recommendation To Day",
     "upcomingWorkouts": "Upcoming Workouts",
-    "letsStartYourDay" : "let's start your day"
+    "letsStartYourDay" : "let's start your day",
+    "number_100_K": "100 K",
+    "number_15_G": "15 G",
+    "number_58_G": "58 G",
+    "number_20_G": "20 G"
 }
