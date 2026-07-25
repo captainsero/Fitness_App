@@ -27,6 +27,21 @@ import '../../features/auth/register/domain/repositories/register_repository.dar
     as _i57;
 import '../../features/auth/register/presentation/view_model/register_cubit.dart'
     as _i318;
+import '../../features/exercise/api/api_client/exercise_api_client.dart'
+    as _i990;
+import '../../features/exercise/api/data_sources/exercise_remote_data_source_impl.dart'
+    as _i604;
+import '../../features/exercise/data/data_sources/exercise_remote_data_source_contract.dart'
+    as _i1013;
+import '../../features/exercise/data/repo/exercise_repo_impl.dart' as _i473;
+import '../../features/exercise/domain/repo/exercise_repo_contract.dart'
+    as _i803;
+import '../../features/exercise/domain/use_cases/get_difficulty_levels_use_case.dart'
+    as _i615;
+import '../../features/exercise/domain/use_cases/get_exercises_by_muscle_difficulty_use_case.dart'
+    as _i570;
+import '../../features/exercise/presentation/view_model/exercise_cubit.dart'
+    as _i476;
 import '../auth_interceptor/auth_interceptor.dart' as _i988;
 import '../dio/dio_module.dart' as _i977;
 import '../services/launcher_service/launcher_service.dart' as _i293;
@@ -53,6 +68,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i397.RegisterApi>(
       () => _i397.RegisterApi(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i990.ExerciseApiClient>(
+      () => _i990.ExerciseApiClient(gh<_i361.Dio>()),
+    );
+    gh.factory<_i1013.ExerciseRemoteDataSourceContract>(
+      () => _i604.ExerciseRemoteDataSourceImpl(
+        apiClient: gh<_i990.ExerciseApiClient>(),
+      ),
+    );
+    gh.factory<_i803.ExerciseRepoContract>(
+      () => _i473.ExerciseRepoImpl(
+        remoteDataSourceContract: gh<_i1013.ExerciseRemoteDataSourceContract>(),
+      ),
+    );
     gh.factory<_i57.RegisterRepository>(
       () => _i200.RegisterRepositoryImpl(
         gh<_i397.RegisterApi>(),
@@ -65,11 +93,28 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i349.SecureStorageService>(),
       ),
     );
+    gh.factory<_i615.GetDifficultyLevelsUseCase>(
+      () => _i615.GetDifficultyLevelsUseCase(
+        repoContract: gh<_i803.ExerciseRepoContract>(),
+      ),
+    );
+    gh.factory<_i570.GetExercisesByMuscleDifficultyUseCase>(
+      () => _i570.GetExercisesByMuscleDifficultyUseCase(
+        repoContract: gh<_i803.ExerciseRepoContract>(),
+      ),
+    );
     gh.factory<_i1000.LoginCubit>(
       () => _i1000.LoginCubit(gh<_i176.LoginRepository>()),
     );
     gh.factory<_i318.RegisterCubit>(
       () => _i318.RegisterCubit(gh<_i57.RegisterRepository>()),
+    );
+    gh.factory<_i476.ExerciseCubit>(
+      () => _i476.ExerciseCubit(
+        getDifficultyLevelsUseCase: gh<_i615.GetDifficultyLevelsUseCase>(),
+        getExercisesByMuscleDifficultyUseCase:
+            gh<_i570.GetExercisesByMuscleDifficultyUseCase>(),
+      ),
     );
     return this;
   }

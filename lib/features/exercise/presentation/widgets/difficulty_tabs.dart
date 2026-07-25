@@ -3,27 +3,26 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/constants/color_manager.dart';
 import '../../../../../../core/constants/font_manager.dart';
 import '../../../../../../core/constants/values_manager.dart';
-import '../../../../../../generated/l10n.dart';
-import '../models/exercise_item.dart';
+import '../../domain/entities/difficulty_level_entity.dart';
 
-/// Row of tappable difficulty tabs. Purely presentational — it reports
-/// selection changes through [onChanged] and lets the parent decide what
-/// that means for the data (e.g. re-filtering a local list today, or
-/// triggering a new API request with a `difficulty` query param later).
+/// Horizontally scrollable row of difficulty-level tabs, built from
+/// whatever the API returns (currently 7 levels), instead of a fixed
+/// 3-value enum. Reports selection through [onChanged] with the tapped
+/// level's id.
 class DifficultyTabs extends StatelessWidget {
   const DifficultyTabs({
     super.key,
-    required this.selected,
+    required this.levels,
+    required this.selectedId,
     required this.onChanged,
   });
 
-  final ExerciseDifficulty selected;
-  final ValueChanged<ExerciseDifficulty> onChanged;
+  final List<DifficultyLevelEntity> levels;
+  final String? selectedId;
+  final ValueChanged<String> onChanged;
 
   @override
   Widget build(BuildContext context) {
-    final s = S.of(context);
-
     return Container(
       decoration: BoxDecoration(
         color: AppColors.neutral900.withValues(alpha: 0.9),
@@ -32,30 +31,26 @@ class DifficultyTabs extends StatelessWidget {
           bottomRight: Radius.circular(RadiusSize.r20),
         ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppPadding.p24,
-          vertical: AppPadding.p4,
-        ),
+      padding: const EdgeInsets.symmetric(vertical: AppPadding.p4),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: ExerciseDifficulty.values.map((difficulty) {
-            final isSelected = difficulty == selected;
-            final label = switch (difficulty) {
-              ExerciseDifficulty.beginner => s.beginner,
-              ExerciseDifficulty.intermediate => s.intermediate,
-              ExerciseDifficulty.advanced => s.advanced,
-            };
+          children: levels.map((level) {
+            final isSelected = level.id == selectedId;
 
-            return Expanded(
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p4),
               child: GestureDetector(
                 onTap: () {
-                  if (!isSelected) onChanged(difficulty);
+                  if (!isSelected) onChanged(level.id);
                 },
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
-                  margin: const EdgeInsets.symmetric(horizontal: AppPadding.p4),
-                  padding: const EdgeInsets.all(AppPadding.p8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p16,
+                    vertical: AppPadding.p8,
+                  ),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: isSelected ? AppColors.primary : Colors.transparent,
@@ -64,8 +59,7 @@ class DifficultyTabs extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    label,
-                    textAlign: TextAlign.center,
+                    level.name,
                     style: TextStyle(
                       color: AppColors.white,
                       fontFamily: FontConstants.balooThambi2,

@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/constants/color_manager.dart';
 import '../../../../../../core/constants/font_manager.dart';
 import '../../../../../../core/constants/values_manager.dart';
-import '../models/exercise_item.dart';
+import '../../domain/entities/exercise_entity.dart';
 
-/// A single row inside the exercise list: thumbnail, title/sets/description,
-/// and a play button.
 class ExerciseRow extends StatelessWidget {
   const ExerciseRow({super.key, required this.item, required this.onPlayTap});
 
-  final ExerciseItem item;
+  final ExerciseEntity item;
   final VoidCallback onPlayTap;
 
   @override
@@ -19,19 +17,13 @@ class ExerciseRow extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(RadiusSize.r20)),
-          child: Image.asset(
-            item.imagePath,
+          child: Container(
             height: AppSize.s80,
             width: AppSize.s80,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => Container(
-              height: AppSize.s80,
-              width: AppSize.s80,
-              color: AppColors.neutral900,
-              child: const Icon(
-                Icons.image_not_supported_rounded,
-                color: AppColors.white,
-              ),
+            color: AppColors.neutral900,
+            child: const Icon(
+              Icons.fitness_center_rounded,
+              color: AppColors.white,
             ),
           ),
         ),
@@ -51,7 +43,7 @@ class ExerciseRow extends StatelessWidget {
               ),
               const SizedBox(height: AppSize.s4),
               Text(
-                item.sets,
+                item.primaryEquipment,
                 style: const TextStyle(
                   color: AppColors.white,
                   fontFamily: FontConstants.balooThambi2,
@@ -59,7 +51,7 @@ class ExerciseRow extends StatelessWidget {
                 ),
               ),
               Text(
-                item.description,
+                item.targetMuscleGroup,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(

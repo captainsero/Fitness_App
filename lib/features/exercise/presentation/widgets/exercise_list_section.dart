@@ -2,18 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../core/constants/color_manager.dart';
 import '../../../../../../core/constants/values_manager.dart';
-import '../models/exercise_item.dart';
+import '../../domain/entities/exercise_entity.dart';
 import 'exercise_row.dart';
 import 'state_placeholders.dart';
 
-/// Card-like container holding the exercise list. Handles the four states
-/// you'll typically have once this is backed by an API call:
-/// loading, error, empty, and populated.
-///
-/// Today the caller only ever passes [isLoading]=false and
-/// [errorMessage]=null since the data is static, but the states are wired
-/// up now so hooking in a real request later is just a matter of passing
-/// through your bloc/provider's status instead of hardcoded values.
 class ExerciseListSection extends StatelessWidget {
   const ExerciseListSection({
     super.key,
@@ -25,8 +17,8 @@ class ExerciseListSection extends StatelessWidget {
     this.emptyMessage = 'No exercises found',
   });
 
-  final List<ExerciseItem> exercises;
-  final void Function(ExerciseItem item, int index) onExerciseTap;
+  final List<ExerciseEntity> exercises;
+  final void Function(ExerciseEntity item, int index) onExerciseTap;
   final bool isLoading;
   final String? errorMessage;
   final VoidCallback? onRetry;
@@ -52,10 +44,7 @@ class ExerciseListSection extends StatelessWidget {
       return const LoadingStateWidget();
     }
     if (errorMessage != null) {
-      return ErrorStateWidget(
-        message: errorMessage!,
-        onRetry: onRetry ?? () {},
-      );
+      return ErrorStateWidget(message: errorMessage!, onRetry: onRetry ?? () {});
     }
     if (exercises.isEmpty) {
       return EmptyStateWidget(label: emptyMessage);

@@ -55,8 +55,10 @@ abstract class AppRouter {
         path: RoutePath.registerRoute,
         builder: (context, state) => const RegisterView(),
       ),GoRoute(
-        path: RoutePath.exerciseView,
-        builder: (context, state) => const ExerciseView(),
+        path: '/exercise',
+        builder: (context, state) => const ExerciseView(
+          primeMoverMuscleId: '69d982ef85f6bfa972bf2248',
+        ),
       ),
       GoRoute(
         path: RoutePath.selectGenderRoute,
