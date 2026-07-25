@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/constants/font_manager.dart';
 import '../../../../core/constants/values_manager.dart';
+import '../../../../core/router/route_path.dart';
 import '../../../../generated/l10n.dart';
 import '../view_model/explore_cubit.dart';
 import '../view_model/explore_event.dart';
@@ -29,7 +31,9 @@ class UpcomingWorkoutsContainer extends StatelessWidget {
               title: S.current.upcomingWorkouts,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                context.go(RoutePath.workoutsRoute);
+              },
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
                 minimumSize: Size.zero,

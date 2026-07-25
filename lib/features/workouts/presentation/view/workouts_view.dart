@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../config/di/di.dart';
 import '../../../../core/constants/color_manager.dart';
 import '../../../../core/constants/font_manager.dart';
 import '../../../../core/constants/values_manager.dart';
+import '../../../../core/router/route_path.dart';
 import '../../../../core/shared_widgets/blurred_background.dart';
+import '../../../../core/shared_widgets/custom_buttom_navigation_bar.dart';
 import '../../../../generated/l10n.dart';
 import '../../domain/entities/muscle_entity.dart';
 import '../view_model/workouts_cubit.dart';
@@ -26,9 +29,26 @@ class WorkoutsView extends StatelessWidget {
 class _WorkoutsView extends StatelessWidget {
   const _WorkoutsView();
 
-  /// Cards are tappable and wired up with the tapped [muscle] on hand --
-  /// hook up navigation to the exercises screen here once it exists.
-  void _onMuscleTap(BuildContext context, MuscleEntity muscle) {}
+  /// Cards are tappable -- navigates to the exercises screen for the
+  /// tapped muscle, passing its id as the required `primeMoverMuscleId`.
+  void _onMuscleTap(BuildContext context, MuscleEntity muscle) {
+    final id = muscle.id;
+    if (id == null || id.isEmpty) return;
+    context.push(RoutePath.exerciseView, extra: id);
+  }
+
+  void _onTabTapped(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        context.go(RoutePath.exploreRoute); // adjust to your actual constant
+      case 1:
+        context.go(RoutePath.smartCouchRoute); // adjust to your actual constant
+      case 2:
+        context.go(RoutePath.workoutsRoute); // adjust to your actual constant
+      case 3:
+        context.go(RoutePath.profileRoute); // adjust to your actual constant
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +75,7 @@ class _WorkoutsView extends StatelessWidget {
                 const SizedBox(height: AppSize.s20),
                 BlocBuilder<WorkoutsCubit, WorkoutsState>(
                   buildWhen: (previous, current) =>
-                      previous.categories != current.categories ||
+                  previous.categories != current.categories ||
                       previous.selectedCategoryIndex !=
                           current.selectedCategoryIndex ||
                       previous.isLoadingCategories !=
@@ -110,7 +130,7 @@ class _WorkoutsView extends StatelessWidget {
                         ),
                         itemCount: state.categories.length,
                         separatorBuilder: (context, index) =>
-                            const SizedBox(width: AppSize.s16),
+                        const SizedBox(width: AppSize.s16),
                         itemBuilder: (context, index) {
                           return _CategoryChip(
                             label: state.categories[index].name,
@@ -128,7 +148,7 @@ class _WorkoutsView extends StatelessWidget {
                 Expanded(
                   child: BlocBuilder<WorkoutsCubit, WorkoutsState>(
                     buildWhen: (previous, current) =>
-                        previous.muscles != current.muscles ||
+                    previous.muscles != current.muscles ||
                         previous.isLoadingMuscles !=
                             current.isLoadingMuscles ||
                         previous.musclesErrorMessage !=
@@ -173,7 +193,7 @@ class _WorkoutsView extends StatelessWidget {
                           AppPadding.p20,
                         ),
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: AppSize.s12,
                           mainAxisSpacing: AppSize.s12,
@@ -195,6 +215,10 @@ class _WorkoutsView extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: 2, // Workouts is tab index 2
+        onTap: (index) => _onTabTapped(context, index),
       ),
     );
   }
@@ -233,7 +257,7 @@ class _CategoryChip extends StatelessWidget {
           label,
           style: TextStyle(
             color:
-                isSelected ? AppColors.white : AppColors.white.withAlpha(190),
+            isSelected ? AppColors.white : AppColors.white.withAlpha(190),
             fontFamily: FontConstants.balooThambi2,
             fontWeight: isSelected
                 ? FontWeightManager.bold
@@ -285,7 +309,7 @@ class _MuscleCard extends StatelessWidget {
                     );
                   },
                   errorBuilder: (context, error, stackTrace) =>
-                      const _MuscleCardFallbackIcon(),
+                  const _MuscleCardFallbackIcon(),
                 )
               else
                 const _MuscleCardFallbackIcon(),
