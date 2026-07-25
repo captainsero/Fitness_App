@@ -21,9 +21,8 @@ abstract class ApiEndpoints {
   static const String exerciseByMuscleDifficulty =
       '$baseUrl/exercises/by-muscle-difficulty';
   static const String difficultyLevelsByPrimeMover =
-      '/levels/difficulty-levels/by-prime-mover';
-  static const String exercisesByMuscleDifficulty =
-      '/exercises/by-muscle-difficulty';
+      '$baseUrl/levels/difficulty-levels/by-prime-mover';
+
   static const String allMuscles = '/muscles';
   static const String randomPrimeMoverMuscles = '/muscles/random';
   static const String muscleGroups = '/muscles';

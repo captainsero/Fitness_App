@@ -44,10 +44,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late Animation<double> _glowAnimation;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-    await _initAnimations();
-    await _navigateToNextScreen();
+    _initAnimations();
+    _navigateToNextScreen();
   }
 
   Future<void> _initAnimations() async {
@@ -132,11 +132,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     _titleSlide = Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero)
         .animate(
-          CurvedAnimation(
-            parent: _textController,
-            curve: const Interval(0, 0.6, curve: Curves.easeOutCubic),
-          ),
-        );
+      CurvedAnimation(
+        parent: _textController,
+        curve: const Interval(0, 0.6, curve: Curves.easeOutCubic),
+      ),
+    );
 
     _textOpacity = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
@@ -147,11 +147,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     _textSlide = Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero)
         .animate(
-          CurvedAnimation(
-            parent: _textController,
-            curve: const Interval(0.4, 1, curve: Curves.easeOutCubic),
-          ),
-        );
+      CurvedAnimation(
+        parent: _textController,
+        curve: const Interval(0.4, 1, curve: Curves.easeOutCubic),
+      ),
+    );
 
     // Start sequence
     await _logoController.forward().then((_) async {
@@ -209,17 +209,17 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               end: Alignment.bottomRight,
               colors: isDark
                   ? [
-                      AppColors.backgroundDark,
-                      AppColors.neutral900,
-                      AppColors.primaryDark9,
-                      AppColors.backgroundDark,
-                    ]
+                AppColors.backgroundDark,
+                AppColors.neutral900,
+                AppColors.primaryDark9,
+                AppColors.backgroundDark,
+              ]
                   : [
-                      AppColors.primaryLight9,
-                      AppColors.white,
-                      AppColors.primaryLight8,
-                      AppColors.white,
-                    ],
+                AppColors.primaryLight9,
+                AppColors.white,
+                AppColors.primaryLight8,
+                AppColors.white,
+              ],
               stops: const [0.0, 0.4, 0.8, 1.0],
             ),
           ),
@@ -312,7 +312,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       // Subtle floating particles
       ...List.generate(
         5,
-        (index) => FloatingParticle(
+            (index) => FloatingParticle(
           animation: _particleController,
           index: index,
           size: size,

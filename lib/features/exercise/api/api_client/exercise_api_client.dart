@@ -18,7 +18,7 @@ abstract class ExerciseApiClient {
     @Query('primeMoverMuscleId') required String primeMoverMuscleId,
   });
 
-  @GET(ApiEndpoints.exercisesByMuscleDifficulty)
+  @GET(ApiEndpoints.exerciseByMuscleDifficulty)
   Future<ExercisesResponse> getExercisesByMuscleDifficulty({
     @Query('primeMoverMuscleId') required String primeMoverMuscleId,
     @Query('difficultyLevelId') required String difficultyLevelId,
