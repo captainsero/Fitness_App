@@ -43,11 +43,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late Animation<Offset> _titleSlide;
   late Animation<double> _glowAnimation;
 
-  @override
-  Future<void> initState() async {
+  //! if ia add async here it will cause the error
+  void initState() {
     super.initState();
-    await _initAnimations();
-    await _navigateToNextScreen();
+    _initAnimations();
+    _navigateToNextScreen();
   }
 
   Future<void> _initAnimations() async {
