@@ -7,8 +7,7 @@ import '../../../../../core/constants/values_manager.dart';
 class AnimatedProgressBar extends StatelessWidget {
 
   const AnimatedProgressBar({
-    super.key,
-    required this.animation,
+    required this.animation, super.key,
     this.width = 160,
     this.height = 3,
     this.color,

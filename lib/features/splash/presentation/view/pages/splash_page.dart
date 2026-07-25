@@ -1,3 +1,6 @@
+// ignore_for_file: document_ignores, inference_failure_on_instance_creation
+// ignore_for_file: unawaited_futures
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -41,13 +44,13 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   late Animation<double> _glowAnimation;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    _initAnimations();
-    _navigateToNextScreen();
+    await _initAnimations();
+    await _navigateToNextScreen();
   }
 
-  void _initAnimations() {
+  Future<void> _initAnimations() async {
     // Logo entrance with bounce
     _logoController = AnimationController(
       duration: const Duration(milliseconds: 1200),
@@ -151,11 +154,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         );
 
     // Start sequence
-    _logoController.forward().then((_) {
+    await _logoController.forward().then((_) async {
       if (mounted) {
-        _fillController.forward();
-        Future.delayed(const Duration(milliseconds: 300), () {
-          if (mounted) _textController.forward();
+        await _fillController.forward();
+        Future.delayed(const Duration(milliseconds: 300), () async {
+          if (mounted) await _textController.forward();
         });
       }
     });

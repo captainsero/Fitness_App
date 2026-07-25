@@ -8,10 +8,7 @@ import '../../../../../core/constants/color_manager.dart';
 class FloatingParticle extends StatelessWidget {
 
   const FloatingParticle({
-    super.key,
-    required this.animation,
-    required this.index,
-    required this.size,
+    required this.animation, required this.index, required this.size, super.key,
   });
   final Animation<double> animation;
   final int index;

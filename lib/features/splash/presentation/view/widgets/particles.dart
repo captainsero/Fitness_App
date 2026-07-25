@@ -6,7 +6,10 @@ import '../../../../../core/constants/color_manager.dart';
 
 class Particles extends StatelessWidget {
   const Particles({
-    required this.index, required this.particleController, required this.size, super.key,
+    required this.index,
+    required this.particleController,
+    required this.size,
+    super.key,
   });
 
   final int index;
