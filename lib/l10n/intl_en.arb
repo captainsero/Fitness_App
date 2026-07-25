@@ -102,5 +102,16 @@
     "beginner": "Beginner",
     "intermediate": "Intermediate",
     "advanced": "Advanced",
-    "noExercisesFound": "No exercises found"
+    "noExercisesFound": "No exercises found",
+    "workouts": "Workouts",
+    "fullBody": "Full Body",
+    "chest": "Chest",
+    "arm": "Arm",
+    "shoulder": "Shoulder",
+    "back": "Back",
+    "legs": "Legs",
+    "waist": "waist",
+    "highChestExercise": "High Chest Exercise",
+    "retry": "Retry",
+    "noMusclesFound": "No muscles found."
 }
