@@ -55,6 +55,9 @@ abstract class AppSize {
   static const double s150 = 150;
   static const double s170 = 170;
   static const double s200 = 200;
+  static const double s280 = 280;
+  static const double s350 = 350;
+  static const double s400 = 400;
 }
 
 abstract class RadiusSize {

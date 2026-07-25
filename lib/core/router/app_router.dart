@@ -14,6 +14,7 @@ import '../../features/auth/register/presentation/view/select_goal_view.dart';
 import '../../features/auth/register/presentation/view/select_height_view.dart';
 import '../../features/auth/register/presentation/view/select_weight_view.dart';
 import '../../features/error/presentation/view/error_view.dart';
+import '../../features/exercise/presentation/view/exercise_view.dart';
 import '../../features/explore/presentation/view/explore_view.dart';
 import '../../features/food_details/presentation/view/food_details_view.dart';
 import '../../features/food_details/presentation/view_model/food_details_cubit.dart';
@@ -27,7 +28,7 @@ import 'route_path.dart';
 
 abstract class AppRouter {
   static final GoRouter goRouter = GoRouter(
-    initialLocation: RoutePath.foodDetailsRoute,
+    initialLocation: RoutePath.splashRoute,
     routes: [
       GoRoute(
         path: RoutePath.splashRoute,
@@ -67,6 +68,11 @@ abstract class AppRouter {
       GoRoute(
         path: RoutePath.registerRoute,
         builder: (context, state) => const RegisterView(),
+      ),GoRoute(
+        path: '/exercise',
+        builder: (context, state) => const ExerciseView(
+          primeMoverMuscleId: '69d982ef85f6bfa972bf2248',
+        ),
       ),
       GoRoute(
         path: RoutePath.selectGenderRoute,

@@ -98,5 +98,9 @@
     "number_100_K": "100 K",
     "number_15_G": "15 G",
     "number_58_G": "58 G",
-    "number_20_G": "20 G"
+    "number_20_G": "20 G",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "noExercisesFound": "No exercises found"
 }

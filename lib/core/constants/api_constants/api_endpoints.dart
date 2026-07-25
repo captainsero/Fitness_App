@@ -20,4 +20,8 @@ abstract class ApiEndpoints {
   static const String levels = '$baseUrl/levels';
   static const String exerciseByMuscleDifficulty =
       '$baseUrl/exercises/by-muscle-difficulty';
+  static const String difficultyLevelsByPrimeMover =
+      '/levels/difficulty-levels/by-prime-mover';
+  static const String exercisesByMuscleDifficulty =
+      '/exercises/by-muscle-difficulty';
 }

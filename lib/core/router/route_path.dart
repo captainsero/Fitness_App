@@ -14,6 +14,7 @@ abstract class RoutePath {
   static const String selectGoalRoute = '/select-goal';
   static const String selectActivityLevelRoute = '/select-activity-level';
   static const String foodDetailsRoute = '/food-details';
+  static const String exerciseView = '/exercise';
 
 
 
