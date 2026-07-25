@@ -53,13 +53,13 @@ class _SelectGoalViewState extends State<SelectGoalView> {
     setState(() => _selectedGoal = goal);
   }
 
-  void _onNextPressed() {
+  Future<void> _onNextPressed() async {
     final data = widget.formData;
     final goal = _selectedGoal;
 
     if (!_canContinue || data == null || goal == null) return;
 
-    context.push(
+    await context.push(
       RoutePath.selectActivityLevelRoute,
       extra: data.copyWith(goal: goal.apiValue),
     );

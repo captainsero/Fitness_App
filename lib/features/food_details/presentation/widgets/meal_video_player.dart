@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/constants/color_manager.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import '../../../../core/constants/color_manager.dart';
 
 class MealVideoPlayer extends StatefulWidget {
   const MealVideoPlayer({required this.videoUrl, super.key});
@@ -49,38 +49,27 @@ class MealVideoPlayerState extends State<MealVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withValues(alpha: 0.35),
-            blurRadius: 14,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Stack(
-          fit: StackFit.expand,
-          alignment: Alignment.center,
-          children: [
-            AnimatedOpacity(
-              opacity: _isReady ? 1 : 0,
-              duration: const Duration(milliseconds: 300),
-              child: YoutubePlayer(
-                controller: _controller,
-              ),
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Stack(
+        fit: StackFit.expand,
+        alignment: Alignment.center,
+        children: [
+          AnimatedOpacity(
+            opacity: _isReady ? 1 : 0,
+            duration: const Duration(milliseconds: 300),
+            child: YoutubePlayer(
+              controller: _controller,
             ),
-            if (!_isReady)
-              const CircularProgressIndicator(
+          ),
+          if (!_isReady)
+            const Center(
+              child: CircularProgressIndicator(
                 color: AppColors.primary,
                 strokeWidth: 2.5,
               ),
-          ],
-        ),
+            ),
+        ],
       ),
     );
   }

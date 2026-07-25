@@ -20,7 +20,9 @@ class FoodDetailsRepoImpl implements FoodDetailsRepoContract {
           final meal = meals.first.mapToEntity();
           return SuccessBaseResponse<MealEntity>(data: meal);
         }
-        return const ErrorBaseResponse<MealEntity>(errorMessage: 'No meal found');
+        return const ErrorBaseResponse<MealEntity>(
+          errorMessage: 'No meal found',
+        );
 
       default:
         return ErrorBaseResponse<MealEntity>(
