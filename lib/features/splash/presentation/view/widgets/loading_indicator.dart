@@ -6,7 +6,10 @@ import 'animated_progress_bar.dart';
 
 class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator({
-    required this.loadingController, required this.textController, required this.textOpacity, super.key,
+    required this.loadingController,
+    required this.textController,
+    required this.textOpacity,
+    super.key,
   });
   final AnimationController loadingController;
   final AnimationController textController;

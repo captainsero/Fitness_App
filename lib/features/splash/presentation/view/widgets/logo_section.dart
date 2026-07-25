@@ -10,7 +10,17 @@ import 'orbiting_dot.dart';
 
 class LogoSection extends StatelessWidget {
   const LogoSection({
-    required this.rotateController, required this.glowController, required this.glowAnimation, required this.pulseController, required this.logoController, required this.logoOpacity, required this.logoScale, required this.fillController, required this.orbitController, required this.shimmerController, super.key,
+    required this.rotateController,
+    required this.glowController,
+    required this.glowAnimation,
+    required this.pulseController,
+    required this.logoController,
+    required this.logoOpacity,
+    required this.logoScale,
+    required this.fillController,
+    required this.orbitController,
+    required this.shimmerController,
+    super.key,
   });
   final Animation<double> orbitController;
   final AnimationController rotateController;
@@ -140,7 +150,7 @@ class LogoSection extends StatelessWidget {
                     ),
                     child: ClipOval(
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaY: 0),
+                        filter: ImageFilter.blur(),
                         child: FillingLogo(
                           fillController: fillController,
                           fillAnimation: fillController,

@@ -5,7 +5,10 @@ import '../../../../../core/constants/values_manager.dart';
 
 class FillingLogo extends StatelessWidget {
   const FillingLogo({
-    required this.fillController, required this.fillAnimation, required this.shimmerController, super.key,
+    required this.fillController,
+    required this.fillAnimation,
+    required this.shimmerController,
+    super.key,
   });
 
   final AnimationController fillController;
@@ -15,9 +18,7 @@ class FillingLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final logoBackgroundColor = isDark
-        ? AppColors.neutral900
-        : AppColors.white;
+    final logoBackgroundColor = isDark ? AppColors.neutral900 : AppColors.white;
 
     return AnimatedBuilder(
       animation: fillController,
