@@ -1,5 +1,4 @@
-// ignore_for_file: document_ignores, inference_failure_on_instance_creation
-// ignore_for_file: unawaited_futures
+// ignore_for_file: discarded_futures
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,7 +49,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     _navigateToNextScreen();
   }
 
-  Future<void> _initAnimations() async {
+  void _initAnimations() {
     // Logo entrance with bounce
     _logoController = AnimationController(
       duration: const Duration(milliseconds: 1200),
@@ -132,11 +131,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     _titleSlide = Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero)
         .animate(
-      CurvedAnimation(
-        parent: _textController,
-        curve: const Interval(0, 0.6, curve: Curves.easeOutCubic),
-      ),
-    );
+          CurvedAnimation(
+            parent: _textController,
+            curve: const Interval(0, 0.6, curve: Curves.easeOutCubic),
+          ),
+        );
 
     _textOpacity = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
@@ -147,18 +146,18 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
     _textSlide = Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero)
         .animate(
-      CurvedAnimation(
-        parent: _textController,
-        curve: const Interval(0.4, 1, curve: Curves.easeOutCubic),
-      ),
-    );
+          CurvedAnimation(
+            parent: _textController,
+            curve: const Interval(0.4, 1, curve: Curves.easeOutCubic),
+          ),
+        );
 
     // Start sequence
-    await _logoController.forward().then((_) async {
+    _logoController.forward().then((_) {
       if (mounted) {
-        await _fillController.forward();
-        Future.delayed(const Duration(milliseconds: 300), () async {
-          if (mounted) await _textController.forward();
+        _fillController.forward();
+        Future.delayed(const Duration(milliseconds: 300), () {
+          if (mounted) _textController.forward();
         });
       }
     });
@@ -209,17 +208,17 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               end: Alignment.bottomRight,
               colors: isDark
                   ? [
-                AppColors.backgroundDark,
-                AppColors.neutral900,
-                AppColors.primaryDark9,
-                AppColors.backgroundDark,
-              ]
+                      AppColors.backgroundDark,
+                      AppColors.neutral900,
+                      AppColors.primaryDark9,
+                      AppColors.backgroundDark,
+                    ]
                   : [
-                AppColors.primaryLight9,
-                AppColors.white,
-                AppColors.primaryLight8,
-                AppColors.white,
-              ],
+                      AppColors.primaryLight9,
+                      AppColors.white,
+                      AppColors.primaryLight8,
+                      AppColors.white,
+                    ],
               stops: const [0.0, 0.4, 0.8, 1.0],
             ),
           ),
@@ -312,7 +311,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
       // Subtle floating particles
       ...List.generate(
         5,
-            (index) => FloatingParticle(
+        (index) => FloatingParticle(
           animation: _particleController,
           index: index,
           size: size,
