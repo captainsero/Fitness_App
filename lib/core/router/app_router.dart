@@ -19,8 +19,6 @@ import '../../features/explore/presentation/view/explore_view.dart';
 import '../../features/explore/presentation/view_model/explore_cubit.dart';
 import '../../features/food_details/presentation/view/food_details_view.dart';
 import '../../features/food_details/presentation/view_model/food_details_cubit.dart';
-
-// import '../../features/explore/presentation/view_model/explore_cubit.dart';
 import '../../features/on_boarding/presentation/views/screen/on_boarding_screen.dart';
 import '../../features/profile/presentation/view/profile_view.dart';
 import '../../features/smart_coach/presentation/view/smart_coach_view.dart';
@@ -30,7 +28,7 @@ import 'route_path.dart';
 
 abstract class AppRouter {
   static final GoRouter goRouter = GoRouter(
-    initialLocation: RoutePath.exploreRoute,
+    initialLocation: RoutePath.splashRoute,
     routes: [
       GoRoute(
         path: RoutePath.splashRoute,
