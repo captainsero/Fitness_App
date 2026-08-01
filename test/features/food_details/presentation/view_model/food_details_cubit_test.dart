@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:fitness_app/config/base_response/base_response.dart';
-import 'package:fitness_app/config/base_state/base_state.dart';
 import 'package:fitness_app/features/food_details/domain/entities/meal_entity.dart';
 import 'package:fitness_app/features/food_details/domain/use_cases/get_meal_details_use_case.dart';
 import 'package:fitness_app/features/food_details/presentation/view_model/food_details_cubit.dart';
